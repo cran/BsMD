@@ -31,15 +31,15 @@ function (fit, code = FALSE, faclab = NULL, block = FALSE, datax = TRUE,
         xlab <- ylab
         ylab <- tmp
     }
-    names(tn$x) <- names(factor.effects)
-    names(tn$y) <- 1:length(tn$y)
+    labx <- names(factor.effects)
+    laby <- 1:length(tn$y)
     points.labels <- names(factor.effects)
-    plot(tn, xlim = c(min(tn$x), max(tn$x) + diff(range(tn$x))/5), 
+    plot.default(tn, xlim = c(min(tn$x), max(tn$x) + diff(range(tn$x))/5), 
         pch = pch, xlab = xlab, ylab = ylab, cex.lab = cex.lab, 
         ...)
     if (is.null(faclab)) {
         if (!code) {
-            effect.code <- names(tn$x)
+            effect.code <- labx
         }
         else {
             terms.ord <- attr(fit$terms, "order")
@@ -93,8 +93,8 @@ function (fit, code = FALSE, faclab = NULL, block = FALSE, datax = TRUE,
                   max.order, factor.code, factor.label)
             }
         }
-        text(tn, paste("     ", effect.code), cex = cex.pch, 
-            adj = 0, xpd = NA)
+        text(tn, paste("   ", effect.code), cex = cex.pch, adj = 0, 
+            xpd = NA)
     }
     else {
         if (!is.list(faclab)) 

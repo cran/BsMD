@@ -1,5 +1,8 @@
+04/09/25 (-ebz)
+- Version 0.6-4 includes minor changes in DanielPlot and the vignette which did not pass the check new R version 2.0.0 (beta).
+
 04/03/01  (-ebz)
-- Version 0.6.3 modified NAMESPACE to include import(stats,graphics) for R-1.9
+- Version 0.6-3 modified NAMESPACE to include import(stats,graphics) for R-1.9
 
 04/03/01 (-ebz)
 - Version 0.6-2. Now includes NAMESPACE and all necessary changes accordingly.

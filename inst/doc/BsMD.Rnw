@@ -322,7 +322,8 @@ y <- BM86.data[,19]
 yield.BsProb <- BsProb(X=X,y=y,blk=0,mFac=15,mInt=1,p=0.20,g=c(1.22,3.74),ng=10,nMod=10)
 summary(yield.BsProb)
 plot(yield.BsProb,main="a) Bayes Plot")
-title(substitute("( " *g* " )",list(g=quote(1.2<=gamma<=3.7))),line=-1)
+#title(substitute("( " *g* " )",list(g=quote(1.2<=gamma<=3.7))),line=-1)
+title(substitute("( " *g1* "" *g2* " )",list(g1=quote(1.2<=gamma),g2=quote(""<=3.7))),line=-1)
 DanielPlot(yield.lm,cex.pch=0.6,main="b) Daniel Plot",
     faclab=list(idx=c(1,7,8,9,10,14),lab=paste(" ",c(1,7,8,9,10,14),sep="")))
 #title("Example IV",outer=TRUE,line=-1,cex=.8)
