@@ -6,8 +6,8 @@ Plot of the factor effects with significance levels based on robust
 estimation of contrast standard errors.}
 }
 \usage{
-LenthPlot(obj, alpha = 0.05, plt = TRUE, xlab = "factors", ylab = "effects",
-    faclab = NULL, cex.fac = par("cex.lab"),
+LenthPlot(obj, alpha = 0.05, plt = TRUE, limits = TRUE,
+    xlab = "factors", ylab = "effects", faclab = NULL, cex.fac = par("cex.lab"),
     cex.axis=par("cex.axis"), adj = 1, ...)
 }
 \arguments{
@@ -16,10 +16,11 @@ LenthPlot(obj, alpha = 0.05, plt = TRUE, xlab = "factors", ylab = "effects",
             and \emph{simultaneous margin of error} (SME). See Lenth(1989).}
   \item{plt}{logical. If \code{TRUE}, a spikes plot with the factor effects is displayed.
             Otherwise, no plot is produced.}
+  \item{limits}{logical. If \code{TRUE} ME and SME limits are displayed and labeled.}
   \item{xlab}{character string. Used to label the x-axis. "factors" as default.}
   \item{ylab}{character string. Used to label the y-axis. "effects" as default.}
-  \item{faclab}{list with components \code{fac} (numeric vector)
-        and \code{lab} (character vector). The \code{fac} entries of
+  \item{faclab}{list with components \code{idx} (numeric vector)
+        and \code{lab} (character vector). The \code{idx} entries of
         effects vector (taken from \code{obj}) are labelled as \code{lab}.
         The rest of the effect names are blanked. If \code{NULL} all factors
         are labelled using the coefficients' name.}
@@ -39,12 +40,12 @@ LenthPlot(obj, alpha = 0.05, plt = TRUE, xlab = "factors", ylab = "effects",
     of error} (SME) for the provided significance (\code{1 - alpha}) level.
     See Lenth(1989).  Spikes are used to display the factor effects.
     If \code{faclab} is \code{NULL}, factors are labelled with the effects or
-    coefficient names. Otherwise, those \code{faclab\$fac} factors are labelled
+    coefficient names. Otherwise, those \code{faclab\$idx} factors are labelled
     as \code{faclab\$lab}. The rest of the factors are blanked.
 }
 \value{
     The function is called mainly for its side effect. It returns a vector with
-    the value of alpha used, ME and SME.
+    the value of alpha used, the estimated PSE, ME and SME.
 }
 \references{Lenth, R. V. (1989).
     "Quick and Easy Analysis of Unreplicated Factorials".

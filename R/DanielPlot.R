@@ -1,5 +1,5 @@
 "DanielPlot" <-
-function (fit, code = FALSE, labels = NULL, block = FALSE, datax = TRUE, 
+function (fit, code = FALSE, faclab = NULL, block = FALSE, datax = TRUE, 
     half = FALSE, pch = "*", cex.lab = par("cex.lab"), cex.pch = par("cex.axis"), 
     ...) 
 {
@@ -37,7 +37,7 @@ function (fit, code = FALSE, labels = NULL, block = FALSE, datax = TRUE,
     plot(tn, xlim = c(min(tn$x), max(tn$x) + diff(range(tn$x))/5), 
         pch = pch, xlab = xlab, ylab = ylab, cex.lab = cex.lab, 
         ...)
-    if (is.null(labels)) {
+    if (is.null(faclab)) {
         if (!code) {
             effect.code <- names(tn$x)
         }
@@ -97,9 +97,9 @@ function (fit, code = FALSE, labels = NULL, block = FALSE, datax = TRUE,
             adj = 0, xpd = NA)
     }
     else {
-        if (!is.list(labels)) 
-            stop("* Argument 'labels' has to be NULL or a list with pt and lab objects")
-        text(tn$x[labels$pt], tn$y[labels$pt], labels = labels$lab, 
+        if (!is.list(faclab)) 
+            stop("* Argument 'faclab' has to be NULL or a list with idx and lab objects")
+        text(tn$x[faclab$idx], tn$y[faclab$idx], labels = faclab$lab, 
             cex = cex.lab, adj = 0)
     }
     invisible(cbind(as.data.frame(tn), no = 1:length(tn$x)))

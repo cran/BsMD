@@ -130,7 +130,7 @@ par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.5,.5,0),oma=c(0,0,0,0),
     xpd=TRUE,pty="s",cex.axis=0.7,cex.lab=0.8,cex.main=0.9)
 DanielPlot(advance.lm,cex.pch=0.8,main="a) Default Daniel Plot")
 DanielPlot(advance.lm,cex.pch=0.8,main="b) Labelled Plot",pch=20,
-    labels=list(pt=c(2,4,8),lab=c(" 2"," 4"," 8")))
+    faclab=list(idx=c(2,4,8),lab=c(" 2"," 4"," 8")))
 @
 \end{center}
 
@@ -151,9 +151,9 @@ signed effects is presented in figure b) below.
 par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.5,.5,0),oma=c(0,0,0,0),
     xpd=TRUE,pty="s",cex.axis=0.7,cex.lab=0.8,cex.main=0.9)
 DanielPlot(strength.lm,half=TRUE,cex.pch=0.8,main="a) Half-Normal Plot",
-    labels=list(pt=c(4,12,13),lab=c(" x4"," x12"," x13")))
+    faclab=list(idx=c(4,12,13),lab=c(" x4"," x12"," x13")))
 DanielPlot(strength.lm,main="b) Normal Plot",
-    labels=list(pt=c(4,12,13),lab=c(" 4"," 12"," 13")))
+    faclab=list(idx=c(4,12,13),lab=c(" 4"," 12"," 13")))
 @
 \end{center}
 
@@ -289,7 +289,7 @@ advance.BsProb <- BsProb(X=X,y=y,blk=0,mFac=15,mInt=1,p=0.20,g=2.49,ng=1,nMod=10
 print(advance.BsProb,X=FALSE,resp=FALSE,nMod=5)
 plot(advance.BsProb,main="a) Bayes Plot")
 DanielPlot(advance.lm,cex.pch=0.6,main="b) Daniel Plot",
-        labels=list(pt=c(2,4,8),lab=c(" x2"," x4"," x8")))
+        faclab=list(idx=c(2,4,8),lab=c(" x2"," x4"," x8")))
 #title("Example I",outer=TRUE,line=-1,cex=.8)
 @
 \end{center}
@@ -324,7 +324,7 @@ summary(yield.BsProb)
 plot(yield.BsProb,main="a) Bayes Plot")
 title(substitute("( " *g* " )",list(g=quote(1.2<=gamma<=3.7))),line=-1)
 DanielPlot(yield.lm,cex.pch=0.6,main="b) Daniel Plot",
-    labels=list(pt=c(1,7,8,9,10,14),lab=paste(" ",c(1,7,8,9,10,14),sep="")))
+    faclab=list(idx=c(1,7,8,9,10,14),lab=paste(" ",c(1,7,8,9,10,14),sep="")))
 #title("Example IV",outer=TRUE,line=-1,cex=.8)
 @
 \end{center}

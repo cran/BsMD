@@ -74,7 +74,7 @@ function (X, y, blk = 0, mFac = 3, mInt = 2, p = 0.25, g = 2,
     ind <- as.integer(-1)
     lst <- .Fortran("bm", X, Y, N, COLS, BLKS, MXFAC, MXINT, 
         PI, INDGAM, INDG2, GAM2, NGAM, GAMMA, NTOP, mdcnt, ptop, 
-        sigtop, nftop, jtop, del, sprob, pgam, prob, ind)
+        sigtop, nftop, jtop, del, sprob, pgam, prob, ind, PACKAGE = "BsMD")
     names(lst) <- c("X", "Y", "N", "COLS", "BLKS", "MXFAC", "MXINT", 
         "PI", "INDGAM", "INDG2", "GAM2", "NGAM", "GAMMA", "NTOP", 
         "mdcnt", "ptop", "sigtop", "nftop", "jtop", "del", "sprob", 

@@ -5,7 +5,7 @@
 Normal plot of effects from a two level factorial experiment.
 }
 \usage{
-DanielPlot(fit, code = FALSE, labels = NULL, block = FALSE,
+DanielPlot(fit, code = FALSE, faclab = NULL, block = FALSE,
     datax = TRUE, half = FALSE, pch = "*", cex.lab = par("cex.lab"),
     cex.pch = par("cex.axis"), ...)
 }
@@ -13,9 +13,9 @@ DanielPlot(fit, code = FALSE, labels = NULL, block = FALSE,
   \item{fit}{object of class \code{lm}. Fitted model from \code{lm} or \code{aov}.}
   \item{code}{logical. If \code{TRUE} labels "A","B", etc are used instead of the
         names of the coefficients (factors).}
-  \item{labels}{list. If \code{NULL} points are labelled accordingly to \code{code},
-    otherwise labels should be a list with \code{pt} (integer vector) and \code{lab}
-    (character vector) components. See \strong{Details}.}
+  \item{faclab}{list. If \code{NULL} points are labelled accordingly to \code{code},
+    otherwise \code{faclab} should be a list with \code{idx} (integer vector) and \code{lab}
+    (character vector) components. See Details.}
   \item{block}{logical. If \code{TRUE}, the first factor is labelled as "BK" (block).}
   \item{datax}{logical. If \code{TRUE}, the x-axis is used for the factor effects the
                 the y-axis for the normal scores. The opposite otherwise.}
@@ -66,7 +66,7 @@ par(mfrow=c(1,3),oma=c(0,0,1,0),pty="s")
 DanielPlot(injectionMolding.lm, half = TRUE, main = "Half-Normal Plot")
 DanielPlot(injectionMolding.lm, main = "Normal Plot of Effects")
 DanielPlot(injectionMolding.lm,
-        labels = list(pt = c(12,4,13), lab = c(" -H"," VG"," -B")),
+        faclab = list(idx = c(12,4,13), lab = c(" -H"," VG"," -B")),
         main = "Active Contrasts")
 }
 \keyword{design}

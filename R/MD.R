@@ -67,7 +67,8 @@ function (X, y, nFac, nBlk = 0, mInt = 3, g = 2, nMod, p, s2,
     flag <- as.integer(-1)
     lst <- .Fortran("md", NSTART, NRUNS, ITMAX, INITDES, N0, 
         IND, X, Y, GAMMA, GAM2, BL, COLS, N, Xcand, NM, P, SIGMA2, 
-        NF, MNF, JFAC, CUT, MBEST, NTOP, TOPD, TOPDES, EPS, flag)
+        NF, MNF, JFAC, CUT, MBEST, NTOP, TOPD, TOPDES, EPS, flag, 
+        PACKAGE = "BsMD")
     names(lst) <- c("NSTART", "NRUNS", "ITMAX", "INITDES", "N0", 
         "IND", "X", "Y", "GAMMA", "GAM2", "BL", "COLS", "N", 
         "Xcand", "NM", "P", "SIGMA2", "NF", "MNF", "JFAC", "CUT", 

@@ -1,7 +1,7 @@
 "LenthPlot" <-
-function (obj, alpha = 0.05, plt = TRUE, xlab = "factors", ylab = "effects", 
-    faclab = NULL, cex.fac = par("cex.lab"), cex.axis = par("cex.axis"), 
-    adj = 1, ...) 
+function (obj, alpha = 0.05, plt = TRUE, limits = TRUE, xlab = "factors", 
+    ylab = "effects", faclab = NULL, cex.fac = par("cex.lab"), 
+    cex.axis = par("cex.axis"), adj = 1, ...) 
 {
     if (class(obj) == "lm") {
         i <- pmatch("(Intercept)", names(coef(obj)))
@@ -11,9 +11,9 @@ function (obj, alpha = 0.05, plt = TRUE, xlab = "factors", ylab = "effects",
     b <- obj
     if (!is.null(faclab)) {
         if (!is.list(faclab)) 
-            stop("* Argument 'faclab' has to be NULL or a list with 'fac' and 'lab' elements")
+            stop("* Argument 'faclab' has to be NULL or a list with 'idx' and 'lab' elements")
         names(b) <- rep("", length(b))
-        names(b)[faclab$fac] <- faclab$lab
+        names(b)[faclab$idx] <- faclab$lab
     }
     m <- length(b)
     d <- m/3
@@ -35,12 +35,17 @@ function (obj, alpha = 0.05, plt = TRUE, xlab = "factors", ylab = "effects",
         for (i in seq(along = x)) segments(x[i], 0, x[i], b[i], 
             lwd = 3, col = 1, lty = 1)
         abline(h = 0, lty = 4, xpd = FALSE)
-        abline(h = ME * c(1, -1), xpd = FALSE, lty = 2, col = grey(0.2))
-        text(adj * (n + 1) * c(1, 1), (ME + strheight("M", cex = cex.axis)) * 
-            c(1, -1), labels = "ME", cex = 0.9 * cex.axis, xpd = TRUE)
-        abline(h = SME * c(1, -1), xpd = FALSE, lty = 3, col = grey(0.2))
-        text(adj * (n + 1) * c(1, 1), (SME + strheight("M", cex = cex.axis)) * 
-            c(1, -1), labels = "SME", cex = 0.9 * cex.axis, xpd = TRUE)
+        if (limits) {
+            abline(h = ME * c(1, -1), xpd = FALSE, lty = 2, col = grey(0.2))
+            text(adj * (n + 1) * c(1, 1), (ME + strheight("M", 
+                cex = cex.axis)) * c(1, -1), labels = "ME", cex = 0.9 * 
+                cex.axis, xpd = FALSE)
+            abline(h = SME * c(1, -1), xpd = FALSE, lty = 3, 
+                col = grey(0.2))
+            text(adj * (n + 1) * c(1, 1), (SME + strheight("M", 
+                cex = cex.axis)) * c(1, -1), labels = "SME", 
+                cex = 0.9 * cex.axis, xpd = FALSE)
+        }
     }
-    return(c(alpha = alpha, ME = ME, SME = SME))
+    return(c(alpha = alpha, PSE = PSE, ME = ME, SME = SME))
 }
