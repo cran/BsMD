@@ -1,6 +1,6 @@
 useDynLib(BsMD)
 
-#import(stats,graphics)
+import(stats,graphics)
 
 export("DanielPlot", "LenthPlot", "BsProb","MD") 
 
