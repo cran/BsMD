@@ -6,8 +6,8 @@ Normal plot of effects from a two level factorial experiment.
 }
 \usage{
 DanielPlot(fit, code = FALSE, faclab = NULL, block = FALSE,
-    datax = TRUE, half = FALSE, pch = "*", cex.lab = par("cex.lab"),
-    cex.pch = par("cex.axis"), ...)
+    datax = TRUE, half = FALSE, pch = "*", cex.fac = par("cex.lab"), 
+    cex.lab = par("cex.lab"), cex.pch = par("cex.axis"), ...)
 }
 \arguments{
   \item{fit}{object of class \code{lm}. Fitted model from \code{lm} or \code{aov}.}
@@ -21,6 +21,7 @@ DanielPlot(fit, code = FALSE, faclab = NULL, block = FALSE,
                 the y-axis for the normal scores. The opposite otherwise.}
   \item{half}{logical. If \code{TRUE}, half-normal plot of effects is display.}
   \item{pch}{numeric or character. Points character.}
+  \item{cex.fac}{numeric. Factors' labels character size.}
   \item{cex.lab}{numeric. Labels character size.}
   \item{cex.pch}{numeric. Points character size.}
   \item{\dots}{graphical parameters passed to \code{plot}.}

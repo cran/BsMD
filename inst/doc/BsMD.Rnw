@@ -8,6 +8,15 @@
 %\usepackage[left=2.5cm,right=2.5cm,top=2.5cm]{geometry}
 \usepackage{geometry}
 
+\newcommand{\code}[1]{\texttt{#1}} \newcommand{\pkg}[1]{\textsf{#1}} 
+\newcommand{\R}{\pkg{R}} \newcommand{\subsectionF}[1]{
+    \subsection*{Function \code{#1}}
+    \addcontentsline{toc}{subsection}{Function \code{#1}}
+    }
+
+%%\VignetteIndexEntry{Rnw script for \emph{BsMD} package} 
+%%\VignetteDepends{BsMD}
+
 %% headings ========================================================
 \pagestyle{myheadings} \markright{\hfill Bayesian Screening and Model
 Discrimination \hfill}
@@ -19,10 +28,11 @@ Discrimination \hfill}
 %\VignetteDepends{BsMD}
 \SweaveOpts{engine=R,eps=TRUE,pdf=TRUE,width=5,height=3,strip.white=TRUE}
 \setkeys{Gin}{width=\textwidth}
-\title{Using the \textsf{BsMD} Package for Bayesian Screening and Model Discrimination}
-\author{Ernesto Barrios\\Center for Quality and Productivity Improvement\\
-  University of Wisconsin-Madison}
-\date{}
+\title{Using the \textsf{BsMD} Package for Bayesian Screening and Model 
+    Discrimination\footnote{\pkg{BsMD} current version: 0.6-5.}}
+\author{Ernesto Barrios\\
+    University of Wisconsin-Madison}
+\date{March, 2005}
 \maketitle
 \tableofcontents
 
@@ -540,7 +550,7 @@ print(MD(X=X,y=y,nFac=4,nBlk=1,mInt=3,g=2,nMod=5,p=p,s2=s2,nf=nf,facs=facs,
 
 This example is based on the $2^5$ factorial reactor experiment presented
 initially in \citet[chap.~12]{BHH-1978} and revisited from the MD criterion
-perspective in \citet[chap.~7]{BHH2-2004}. The full design matrix and
+perspective in \citet[chap.~7]{BHH2-2005}. The full design matrix and
 response is:
 << ReactorData,echo=TRUE>>==
 data(Reactor.data,package="BsMD")
@@ -606,7 +616,7 @@ factors $B$, $D$ and possibly $E$ too, are cleared from the other factors.
 Note also that the final set of runs under the one-at-a-time approach $(10,
 4, 11, 15)$ ended being different from $(4, 10, 11, 26)$ suggested by the
 4-run follow-up strategy based on $\gamma=0.4$. Bayes plots for each step are
-displayed in the figure below. See \citet[chap.~7]{BHH2-2004} for discussion
+displayed in the figure below. See \citet[chap.~7]{BHH2-2005} for discussion
 of this approach. The code used in this section is included as appendix.
 
 <<One-at-a-time,echo=FALSE >>=

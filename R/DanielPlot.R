@@ -1,7 +1,7 @@
 "DanielPlot" <-
 function (fit, code = FALSE, faclab = NULL, block = FALSE, datax = TRUE, 
-    half = FALSE, pch = "*", cex.lab = par("cex.lab"), cex.pch = par("cex.axis"), 
-    ...) 
+    half = FALSE, pch = "*", cex.fac = par("cex.lab"), cex.lab = par("cex.lab"), 
+    cex.pch = par("cex.axis"), ...) 
 {
     if (any(names(coef(fit)) == "(Intercept)")) {
         factor.effects <- 2 * coef(fit)[-1]
@@ -54,7 +54,7 @@ function (fit, code = FALSE, faclab = NULL, block = FALSE, datax = TRUE,
                 texto <- paste(texto, ", ", factor.code[i], "=", 
                   factor.label[i])
             }
-            mtext(side = 1, line = 2.5, texto, cex = cex.lab)
+            mtext(side = 1, line = 2.5, texto, cex = cex.fac)
             get.sep <- function(string, max.order) {
                 k <- max.order - 1
                 get.sep <- rep(0, k)
@@ -100,7 +100,7 @@ function (fit, code = FALSE, faclab = NULL, block = FALSE, datax = TRUE,
         if (!is.list(faclab)) 
             stop("* Argument 'faclab' has to be NULL or a list with idx and lab objects")
         text(tn$x[faclab$idx], tn$y[faclab$idx], labels = faclab$lab, 
-            cex = cex.lab, adj = 0)
+            cex = cex.fac, adj = 0)
     }
     invisible(cbind(as.data.frame(tn), no = 1:length(tn$x)))
 }

@@ -30,7 +30,9 @@ function (obj, alpha = 0.05, plt = TRUE, limits = TRUE, xlab = "factors",
         plot(x, b, xlim = c(1, n + 1), ylim = ylim, type = "n", 
             xlab = xlab, ylab = ylab, frame = FALSE, axes = FALSE, 
             ...)
-        axis(1, at = x, labels = names(b), lty = 0, cex.axis = cex.axis)
+        idx <- x[names(b) != ""]
+        text(x[idx], rep(par("usr")[3], length(idx)), labels = names(b)[idx], 
+            cex = cex.fac, xpd = NA)
         axis(2, cex.axis = cex.axis)
         for (i in seq(along = x)) segments(x[i], 0, x[i], b[i], 
             lwd = 3, col = 1, lty = 1)
