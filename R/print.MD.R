@@ -1,4 +1,4 @@
-"print.MD" <-
+`print.MD` <-
 function (x, X = FALSE, resp = FALSE, Xcand = TRUE, models = TRUE, 
     nMod = x$nMod, digits = 3, verbose = FALSE, ...) 
 {

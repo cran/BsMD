@@ -1,4 +1,4 @@
-"print.BsProb" <-
+`print.BsProb` <-
 function (x, X = TRUE, resp = TRUE, factors = TRUE, models = TRUE, 
     nMod = 10, digits = 3, plt = FALSE, verbose = FALSE, ...) 
 {

@@ -3,7 +3,7 @@
 \title{Summary of Best MD Follow-Up Experiments}
 \description{
     Reduced printing method for lists of class \code{MD}. Displays the
-    best MD criterion set of runs and their MD for follow-up experiments.}
+    best MD criterion set of runs and their MD for follow-up experiments.
 }
 \usage{
 summary.MD(object, digits = 3, verbose=FALSE, ...)

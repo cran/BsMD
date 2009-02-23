@@ -3,7 +3,7 @@
 \title{Lenth's Plot of Effects}
 \description{
 Plot of the factor effects with significance levels based on robust
-estimation of contrast standard errors.}
+estimation of contrast standard errors.
 }
 \usage{
 LenthPlot(obj, alpha = 0.05, plt = TRUE, limits = TRUE,

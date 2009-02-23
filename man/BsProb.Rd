@@ -44,7 +44,7 @@ code. Small letters used for capturing program's output.
   \item{X}{matrix. The design matrix.}
   \item{Y}{vector. The response vector.}
   \item{N}{integer. The number of runs.}
-  \itme{COLS}{integer. The number of design factors.}
+  \item{COLS}{integer. The number of design factors.}
   \item{BLKS}{integer. The number of blocking factors accommodated in the first
                 columns of matrix \code{X}.}
   \item{MXFAC}{integer. Maximum number of factors considered in the models.}
@@ -94,7 +94,7 @@ application of Bayesian design and analysis of fractional factorial experiments,
 part of the \pkg{mdopt} bundle, available at \emph{StatLib}.
 }
 \seealso{
-    \code{\link{print.BsProb}}, \code{\link{print.BsProb}}, \code{\link{summary.BsProb}}.
+    \code{\link{print.BsProb}}, \code{\link{plot.BsProb}}, \code{\link{summary.BsProb}}.
 }
 \examples{
 library(BsMD)

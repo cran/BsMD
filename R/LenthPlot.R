@@ -1,4 +1,4 @@
-"LenthPlot" <-
+`LenthPlot` <-
 function (obj, alpha = 0.05, plt = TRUE, limits = TRUE, xlab = "factors", 
     ylab = "effects", faclab = NULL, cex.fac = par("cex.lab"), 
     cex.axis = par("cex.axis"), adj = 1, ...) 

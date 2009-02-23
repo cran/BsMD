@@ -3,7 +3,7 @@
 \title{Print Best MD Follow-Up Experiments}
 \description{
     Printing method for  lists of class \code{MD}. Displays the
-    best MD criterion set of runs and their MD for follow-up experiments.}
+    best MD criterion set of runs and their MD for follow-up experiments.
 }
 \usage{
 print.MD(x, X = FALSE, resp = FALSE, Xcand = TRUE, models = TRUE, nMod = x$nMod,
