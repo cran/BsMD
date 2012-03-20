@@ -6,7 +6,7 @@
     best MD criterion set of runs and their MD for follow-up experiments.
 }
 \usage{
-summary.MD(object, digits = 3, verbose=FALSE, ...)
+    \method{summary}{MD}(object, digits = 3, verbose=FALSE, ...)
 }
 \arguments{
   \item{object}{list of \code{MD} class. Output list of \code{\link{MD}} function.}

@@ -6,7 +6,7 @@
     posterior probabilities of factors and models from Bayesian screening
     procedure.}
 \usage{
-    summary.BsProb(object, nMod = 10, digits = 3, ...)
+    \method{summary}{BsProb}(object, nMod = 10, digits = 3, ...)
 }
 \arguments{
   \item{object}{list. \code{BsProb} class list. Output list of \code{\link{BsProb}} function.}

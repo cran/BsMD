@@ -6,7 +6,7 @@
     probabilities of factors and models from the Bayesian screening procedure.
 }
 \usage{
-    print.BsProb(x, X = TRUE, resp = TRUE, factors = TRUE, models = TRUE,
+    \method{print}{BsProb}(x, X = TRUE, resp = TRUE, factors = TRUE, models = TRUE,
             nMod = 10, digits = 3, plt = FALSE, verbose = FALSE, ...)
 }
 \arguments{

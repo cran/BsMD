@@ -1,4 +1,4 @@
-`BsProb` <-
+BsProb <-
 function (X, y, blk = 0, mFac = 3, mInt = 2, p = 0.25, g = 2, 
     ng = 1, nMod = 10) 
 {

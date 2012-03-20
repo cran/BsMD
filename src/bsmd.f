@@ -173,63 +173,63 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       INUNIT=5
       OUNIT=1
 
-      OPEN(OUNIT,FILE="BsPrint.out")
+CC      OPEN(OUNIT,FILE="BsPrint.out")
 
-      WRITE(OUNIT,1000)
+CC      WRITE(OUNIT,1000)
       OCOUNT=3
       IF ((N .LT. 1) .OR. (N .GT. MAXN)) THEN
-        WRITE(OUNIT,1500)
-        WRITE(OUNIT,1501) N,MAXN
+CC        WRITE(OUNIT,1500)
+CC        WRITE(OUNIT,1501) N,MAXN
 	    ind = 1501
         GO TO 700
       ENDIF
 C
       IF ((COLS .LT. 1) .OR. (COLS .GT. MAXCOL)) THEN
-        WRITE(OUNIT,1500)
-        WRITE(OUNIT,1502) COLS,MAXCOL
+CC        WRITE(OUNIT,1500)
+CC        WRITE(OUNIT,1502) COLS,MAXCOL
 	    ind = 1502
         GO TO 700
       ENDIF
 C
       IF ((BLKS .LT. 0) .OR. (BLKS .GT. MAXCOL)) THEN
-        WRITE(OUNIT,1500)
-        WRITE(OUNIT,1502) BLKS,MAXCOL
+CC        WRITE(OUNIT,1500)
+CC        WRITE(OUNIT,1502) BLKS,MAXCOL
 	    ind = 1502
         GO TO 700
       ENDIF
 C
       IF ((MXFAC .LT. 1) .OR. (MXFAC .GT. COLS)) THEN
-        WRITE(OUNIT,1500)
-        WRITE(OUNIT,1503) MXFAC,COLS
+CC        WRITE(OUNIT,1500)
+CC        WRITE(OUNIT,1503) MXFAC,COLS
 	    ind = 1503
         GO TO 700
       ENDIF
 C
       IF ((MXINT .LT. 1) .OR. (MXINT .GT. MXMXIN)) THEN
-        WRITE(OUNIT,1500)
-        WRITE(OUNIT,1504) MXINT,MXMXIN
+CC        WRITE(OUNIT,1500)
+CC        WRITE(OUNIT,1504) MXINT,MXMXIN
 	    ind = 1504
         GO TO 700
       ENDIF
 C
       IF ((MXINT .EQ. 3) .AND.
      & ((MXFAC*(MXFAC-1)*(MXFAC-2)/6) .GT. MAXTERM)) THEN
-        WRITE(OUNIT,1500)
-        WRITE(OUNIT,1505) MXINT,COLS
+CC        WRITE(OUNIT,1500)
+CC        WRITE(OUNIT,1505) MXINT,COLS
 	    ind = 1505
         GO TO 700
       ENDIF
 C
       IF ((PI .LE. 0) .OR. (PI .GE. 1.0)) THEN
-        WRITE(OUNIT,1500)
-        WRITE(OUNIT,1506) PI
+CC        WRITE(OUNIT,1500)
+CC        WRITE(OUNIT,1506) PI
 	    ind = 1506
         GO TO 700
       ENDIF
 C
       IF ((INDGAM .NE. 0) .AND. (INDGAM .NE. 1)) THEN
-        WRITE(OUNIT,1500)
-        WRITE(OUNIT,1507) INDGAM
+CC        WRITE(OUNIT,1500)
+CC       WRITE(OUNIT,1507) INDGAM
 	    ind = 1507
         GO TO 700
       ENDIF
@@ -238,15 +238,15 @@ C
        NGAM=1
 
        IF (GAMMA(1) .LT. 0.0) THEN
-         WRITE(OUNIT,1500)
-         WRITE(OUNIT,1508) GAMMA(1)
+CC        WRITE(OUNIT,1500)
+CC        WRITE(OUNIT,1508) GAMMA(1)
 	     ind = 15081
          GO TO 700
        ENDIF
 
        IF ((NTOP .LT. 0) .OR. (NTOP .GT. MAXNMD)) THEN
-         WRITE(OUNIT,1500)
-         WRITE(OUNIT,1513) NTOP,MAXNMD
+CC         WRITE(OUNIT,1500)
+CC         WRITE(OUNIT,1513) NTOP,MAXNMD
          NTOP=MAXNMD
        ENDIF
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -263,26 +263,26 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
        NTOP=0
        IF ((NGAM .LE. 1) .OR. (NGAM .GT. MAXGAM)) THEN
-         WRITE(OUNIT,1500)
-         WRITE(OUNIT,1509) NGAM,MAXGAM
+CC         WRITE(OUNIT,1500)
+CC         WRITE(OUNIT,1509) NGAM,MAXGAM
 	     ind = 1509
          GO TO 700
        ENDIF
        IF (GAMMA(1) .LE. 0.0) THEN
-         WRITE(OUNIT,1500)
-         WRITE(OUNIT,1508) GAMMA(1)
+CC         WRITE(OUNIT,1500)
+CC        WRITE(OUNIT,1508) GAMMA(1)
 	     ind = 15082
          GO TO 700
        ENDIF
        IF (GAMMA(NGAM) .LE. 0.0) THEN
-         WRITE(OUNIT,1500)
-         WRITE(OUNIT,1508) GAMMA(1)
+CC         WRITE(OUNIT,1500)
+CC         WRITE(OUNIT,1508) GAMMA(1)
 	     ind = 15083
          GO TO 700
        ENDIF
        IF (GAMMA(NGAM) .LE. GAMMA(1)) THEN
-         WRITE(OUNIT,1500)
-         WRITE(OUNIT,1510) GAMMA(1),GAMMA(NGAM)
+CC         WRITE(OUNIT,1500)
+CC         WRITE(OUNIT,1510) GAMMA(1),GAMMA(NGAM)
 	     ind = 1510
          GO TO 700
        ENDIF
@@ -388,7 +388,7 @@ C
 C      FORM X-PRIME-X MATRIX
 C
       DO 270 I=1,NTERM                                                  
-      DO 270 J=I,NTERM                                                  
+      DO 270 J=I,NTERM
         AA(I,J)=0.0
         DO 260 M=1,N                                                    
  260      AA(I,J)=AA(I,J)+A(M,I)*A(M,J)
@@ -420,7 +420,7 @@ C     PGAMMA=(GAMMA(IGAM)**(-3))*DEXP(-1.0/(GAMMA(IGAM)**2))
  320      B(I)=B(I)+A(M,I)*Y(M)                                         
       CALL DPOCO(AA,MAXTERM,NTERM,COND,Z,INFO)                          
       IF ((COND+1.0) .EQ. COND) THEN                                    
-       WRITE(OUNIT,1511)                                                
+CC       WRITE(OUNIT,1511)
        OCOUNT=OCOUNT+1
        GO TO 400                                                        
       ENDIF
@@ -491,30 +491,30 @@ C
  420  CONTINUE
 
 
-      WRITE(OUNIT,1101)
+CC      WRITE(OUNIT,1101)
       OCOUNT=OCOUNT+1
       OCOUNT=MOD(OCOUNT,LS)
       IF (COLS .LE. 15) CALL OSPACE(LS,OCOUNT,N+3,CC)
       IF (COLS .GT. 15) CALL OSPACE(LS,OCOUNT,2*N+3,CC)
-      WRITE(OUNIT,1001) CC
-      DO 500 I=1,N
-         WRITE(OUNIT,1002) I,(X(I,J), J=1,MIN0(15,COLS+BLKS))
-         IF ((COLS+BLKS) .GT. 15)
-     &   WRITE(OUNIT,1115) (X(I,J), J=16,COLS+BLKS)
- 500  CONTINUE
-      WRITE(OUNIT,1101)
+CC      WRITE(OUNIT,1001) CC
+CC      DO 500 I=1,N
+CC         WRITE(OUNIT,1002) I,(X(I,J), J=1,MIN0(15,COLS+BLKS))
+CC         IF ((COLS+BLKS) .GT. 15)
+CC     &   WRITE(OUNIT,1115) (X(I,J), J=16,COLS+BLKS)
+CC      500  CONTINUE
+CC      WRITE(OUNIT,1101)
       CALL OSPACE(LS,OCOUNT,N+3,CC)
-      WRITE(OUNIT,1003) CC
+CC      WRITE(OUNIT,1003) CC
       DO 510 I=1,N
-        WRITE(OUNIT,1004) I,Y(I)                                        
+CC        WRITE(OUNIT,1004) I,Y(I)
  510  CONTINUE
-      WRITE(OUNIT,1101)
+CC      WRITE(OUNIT,1101)
       CALL OSPACE(LS,OCOUNT,6,CC)
-      WRITE(OUNIT,1100) CC                                              
-      WRITE(OUNIT,1104) N,COLS,BLKS,PI,MXINT,MXFAC,MDCNT
-      IF (INDGAM .EQ. 0) WRITE(OUNIT,1117) GAMMA(1),GAM2,NORM(1)
-      IF (INDGAM .EQ. 1) WRITE(OUNIT,1118) GAMMA(1),GAMMA(NGAM),DEL
-      WRITE(OUNIT,1101)                                                 
+CC      WRITE(OUNIT,1100) CC
+CC      WRITE(OUNIT,1104) N,COLS,BLKS,PI,MXINT,MXFAC,MDCNT
+CC      IF (INDGAM .EQ. 0) WRITE(OUNIT,1117) GAMMA(1),GAM2,NORM(1)
+CC      IF (INDGAM .EQ. 1) WRITE(OUNIT,1118) GAMMA(1),GAMMA(NGAM),DEL
+CC      WRITE(OUNIT,1101)
       MXNORM=0.0
 C     PROB0=0.0
       DO 530 I=1,NGAM
@@ -524,57 +524,61 @@ C       PGAMMA=(GAMMA(I)**(-3))*DEXP(-1.0/(GAMMA(I)**2))
 C       PROB0=PROB0+PGAMMA
         SUMNORM=SUMNORM+PGAM(I)
         DO 520 J=1,COLS
- 520      PROB(J,I)=PROB(J,I)/NORM(I)
- 530  MXNORM=DMAX1(MXNORM,PGAM(I))
+520      PROB(J,I)=PROB(J,I)/NORM(I)
+530   MXNORM=DMAX1(MXNORM,PGAM(I))
         DO 540 J=1,COLS
- 540      SPROB(J)=SPROB(J)/SUMNORM
-      WRITE(OUNIT,1101)                                                 
+540      SPROB(J)=SPROB(J)/SUMNORM
+CC      WRITE(OUNIT,1101)
       IF (INDGAM .EQ. 0) THEN
         DO 545 I=1,NTOP
- 545      PTOP(I)=PTOP(I)/SUMNORM
+545      PTOP(I)=PTOP(I)/SUMNORM
           CALL SSORT(PTOP,PINDEX,NTOP,-2)
         IF (NTOP .GT. MDCNT) NTOP=MDCNT
         CALL OSPACE(LS,OCOUNT,NTOP+4,CC)
-        WRITE(OUNIT,1105) CC,NTOP                                       
+CC        WRITE(OUNIT,1105) CC,NTOP
         DO 547 I=1,NTOP
- 547   WRITE(OUNIT,1106) PTOP(I),SIGTOP(PINDEX(I)),NFTOP(PINDEX(I)),
-     &(JTOP(PINDEX(I),J),J=1,NFTOP(PINDEX(I)))
-       WRITE(OUNIT,1101)                                                
+CC       WRITE(OUNIT,1106) PTOP(I),SIGTOP(PINDEX(I)),NFTOP(PINDEX(I)),
+CC     &(JTOP(PINDEX(I),J),J=1,NFTOP(PINDEX(I)))
+CC       WRITE(OUNIT,1101)
+547     CONTINUE
       ENDIF
       IF (INDGAM .EQ. 1) THEN
         CALL OSPACE(LS,OCOUNT,NGAM+2,CC)
-        WRITE(OUNIT,1102) CC                                            
-        DO 550 I=1,NGAM                                                 
+CC        WRITE(OUNIT,1102) CC
+        DO 550 I=1,NGAM
          P=PGAM(I)/MXNORM
          BAR=IDNINT((P-DMOD(P,.05D0))/.05D0)
- 550     WRITE(OUNIT,1103)
-     &    GAMMA(I),PGAM(I),(ST,J=1,BAR),(BL,J=1,20-BAR)
-        WRITE(OUNIT,1101)
+CC         WRITE(OUNIT,1103)
+CC     &    GAMMA(I),PGAM(I),(ST,J=1,BAR),(BL,J=1,20-BAR)
+550      CONTINUE
+CC        WRITE(OUNIT,1101)
       ENDIF
       CALL OSPACE(LS,OCOUNT,COLS+5,CC)
-      IF (INDGAM .EQ. 0) WRITE(OUNIT,1107) CC
-      IF (INDGAM .EQ. 1) WRITE(OUNIT,1116) CC
+CC      IF (INDGAM .EQ. 0) WRITE(OUNIT,1107) CC
+CC      IF (INDGAM .EQ. 1) WRITE(OUNIT,1116) CC
       P=DINT((1000.0D0*PROBZERO/SUMNORM)/PSCAL)/1000.0D0
       p0 = P
       BAR=IDNINT((P-DMOD(P,.05D0))/.05D0)
-      WRITE(OUNIT,1114) P,(ST,J=1,BAR),(BL,J=1,20-BAR)
+CC      WRITE(OUNIT,1114) P,(ST,J=1,BAR),(BL,J=1,20-BAR)
       DO 560 I=1,COLS
          P=DINT(1000.0D0*SPROB(I))/1000.0D0
          BAR=IDNINT((P-DMOD(P,.05D0))/.05D0)
- 560     WRITE(OUNIT,1109) I,SPROB(I),(ST,J=1,BAR),(BL,J=1,20-BAR)
-      WRITE(OUNIT,1101)
+ 560     CONTINUE
+CC         WRITE(OUNIT,1109) I,SPROB(I),(ST,J=1,BAR),(BL,J=1,20-BAR)
+CC      WRITE(OUNIT,1101)
       IF (INDGAM .EQ. 1) THEN
         OLOOP=(NGAM-MOD(NGAM,12))/12+1
         DO 610 K=1,OLOOP
           ISTART=1+(K-1)*12
           CALL OSPACE(LS,OCOUNT,COLS+5,CC)
-          WRITE(OUNIT,1110) CC
-          WRITE(OUNIT,1111) (GAMMA(I),I=ISTART,MIN0(ISTART+11,NGAM))
-          WRITE(OUNIT,1112)
-     &     ((PROB0(I)/NORM(I))/PSCAL, I=ISTART,MIN0(ISTART+11,NGAM))
+CC          WRITE(OUNIT,1110) CC
+CC          WRITE(OUNIT,1111) (GAMMA(I),I=ISTART,MIN0(ISTART+11,NGAM))
+CC          WRITE(OUNIT,1112)
+CC     &     ((PROB0(I)/NORM(I))/PSCAL, I=ISTART,MIN0(ISTART+11,NGAM))
           DO 600 I=1,COLS
- 600    WRITE(OUNIT,1113) I,(PROB(I,J),J=ISTART,MIN0(ISTART+11,NGAM))
-          WRITE(OUNIT,1101)
+CC          WRITE(OUNIT,1113) I,(PROB(I,J),J=ISTART,MIN0(ISTART+11,NGAM))
+600       CONTINUE
+CC          WRITE(OUNIT,1101)
 610    CONTINUE
       ENDIF
 
@@ -1677,7 +1681,7 @@ C>>>>>>>>>>>>>>>>>>>>  mds.f  <<<<<<<<<<<<<<<<<<<<<<<<<C
       COMMON BETA,G,P,X,SIGMA2,NF,JFAC,BL,CUT,COLS,NM
 
       OUT = 1
-      OPEN(OUT,FILE="MDPrint.out")
+CC      OPEN(OUT,FILE="MDPrint.out")
 
 
       NM = cNM
@@ -1696,23 +1700,23 @@ C>>>>>>>>>>>>>>>>>>>>  mds.f  <<<<<<<<<<<<<<<<<<<<<<<<<C
 6         JFAC(i,j) = cJFAC(i,j)
 5     continue
 
-      WRITE(OUT,800)
+CC      WRITE(OUT,800)
       IF (IND .EQ. 1) THEN
          GAM2 = GAM2
       ELSE
          GAM2 = GAMMA
       ENDIF
 
-      WRITE(OUT,1101)
-      WRITE(OUT,1000)
-      WRITE(OUT,1001) N0,COLS,BL,CUT,GAMMA,GAM2,NM
-      WRITE(OUT,1002)
-      WRITE(OUT,1003) N,NRUNS,ITMAX,NSTART
-      WRITE(OUT,1101)
-      WRITE(OUT,1004)
-      DO 15 I=1,NM
-        WRITE(OUT,1005) I,P(I),SIGMA2(I),NF(I),(JFAC(I,J),J=1,NF(I))
- 15   CONTINUE
+CC      WRITE(OUT,1101)
+CC      WRITE(OUT,1000)
+CC      WRITE(OUT,1001) N0,COLS,BL,CUT,GAMMA,GAM2,NM
+CC      WRITE(OUT,1002)
+CC      WRITE(OUT,1003) N,NRUNS,ITMAX,NSTART
+CC      WRITE(OUT,1101)
+CC      WRITE(OUT,1004)
+CC      DO 15 I=1,NM
+CC        WRITE(OUT,1005) I,P(I),SIGMA2(I),NF(I),(JFAC(I,J),J=1,NF(I))
+CC 15   CONTINUE
 C  **************************************
 C  * SUPPRESS UNDERFLOW WARNINGS ON IBM *
 C  **************************************
@@ -1725,10 +1729,10 @@ C      DATA DTOP /MXSTRT*0.0/
       do 17 i = 1, MXSTRT
 17    DTOP(i) = 0.0D0
 
-      WRITE(OUT,1102)
-      DO 16 I=1,N
-         WRITE(OUT,1103) I,(X(I,J), J=1,COLS+BL)
- 16      CONTINUE
+CC      WRITE(OUT,1102)
+CC      DO 16 I=1,N
+CC         WRITE(OUT,1103) I,(X(I,J), J=1,COLS+BL)
+CC 16      CONTINUE
 
 C
 C     ONE-TIME INITIALIZATION
@@ -1808,15 +1812,15 @@ C     CALL DLINDS(TOTO,AA,MAXCOL,AA,MAXCOL)
  190  CONTINUE
 C
 C
-      IF (ITMAX .EQ. 0) WRITE(OUT,1200)
+CC      IF (ITMAX .EQ. 0) WRITE(OUT,1200)
       NDTOP=1
       IJ=1
       DO 700 ISTART=1,NSTART
-      IF (ITMAX .GT. 0) THEN
-        WRITE(OUT,1101)
-        WRITE(OUT,1199) ISTART
-        WRITE(OUT,1200)
-      ENDIF
+CC      IF (ITMAX .GT. 0) THEN
+CC        WRITE(OUT,1101)
+CC        WRITE(OUT,1199) ISTART
+CC        WRITE(OUT,1200)
+CC      ENDIF
 C     CALL RNUND(NRUNS,N,BEST)
       IF (INITDES .GT. 0) THEN
         CALL RANST(NRUNS,N,BEST,0.0D0)
@@ -1854,7 +1858,7 @@ C
           CALL FINDMIN(NDTOP,IJ,DTOP,MXSTRT)
         ENDIF
       ENDIF
-      WRITE(OUT,1201) M,D,(BEST(J), J=1,NRUNS)
+CC      WRITE(OUT,1201) M,D,(BEST(J), J=1,NRUNS)
       IF (ITMAX .EQ. 0) GO TO 700
 C
 C    NOW START EXCHANGE ITERATIONS
@@ -1876,7 +1880,7 @@ C
           BEST(NRUNS+1)=I
         ENDIF
  450  CONTINUE
-      WRITE(OUT,1201) M,DBEST,(BEST(J), J=1,NRUNS+1)
+CC      WRITE(OUT,1201) M,DBEST,(BEST(J), J=1,NRUNS+1)
 C
 C     THEN CYCLE THROUGH THE (NRUNS+1) POSSIBLE DELETED POINTS          
 C                                                                       
@@ -1920,33 +1924,33 @@ C
       DO 475 J=1,NRUNS
         IF (J .GE. BESTI) BEST(J)=BEST(J+1)
  475  CONTINUE                                                          
-      WRITE(OUT,1201) M,DBEST,(BEST(J), J=1,NRUNS)                        
+CC      WRITE(OUT,1201) M,DBEST,(BEST(J), J=1,NRUNS)                        
       IF ((DELTAD .GT. EPS).AND. (M .LT. ITMAX)) GO TO 500              
 C
 C   ITERATIONS ENDED; CONVERGENCE OR MAX ITERATIONS REACHED             
 C                                                                       
       IF (DELTAD .LE. EPS) THEN
-        WRITE(OUT,1202)
+CC        WRITE(OUT,1202)
 C       CALL SVIGN(NRUNS,BEST,BEST)                                     
 C       WRITE(OUT,1204)                                                   
 C       DO 690 I=1,NRUNS                                                
 C         WRITE(OUT,1205) I,BEST(I),(X(BEST(I),J), J=1,COLS+BL)           
 C690    CONTINUE
       ENDIF                                                             
-      IF (M .GE. ITMAX) WRITE(OUT,1203)
+CC      IF (M .GE. ITMAX) WRITE(OUT,1203)
 C     WRITE(OUT,1101)
  700  CONTINUE
       ND=MIN0(MXSTRT,NDTOP-1)                                                 
       DO 701 I=1,ND
  701    ITOP(I)=I                                                       
       CALL SSORT(DTOP,ITOP,ND,-2)                                       
-      WRITE(OUT,1209)
-      WRITE(OUT,1206) ND
-      WRITE(OUT,1209)
-      WRITE(OUT,1210)
-      DO 710 J=1,ND
-        WRITE(OUT,1201) J,DTOP(J),(TOPROW(ITOP(J),K), K=1,NRUNS)
- 710  CONTINUE
+CC      WRITE(OUT,1209)
+CC      WRITE(OUT,1206) ND
+CC      WRITE(OUT,1209)
+CC      WRITE(OUT,1210)
+CC      DO 710 J=1,ND
+CC        WRITE(OUT,1201) J,DTOP(J),(TOPROW(ITOP(J),K), K=1,NRUNS)
+CC 710  CONTINUE
 ccccccccccccc
       NTOP = MIN0(NTOP,ND)
       DO 711 J = 1,NTOP
@@ -1955,15 +1959,15 @@ ccccccccccccc
            TOPDES(J,K) = TOPROW(ITOP(J),K)
 711   CONTINUE
 ccccccccccccc
-      IF (ITMAX .GT. 0) THEN
-        DO 720 J=1,ND                                                   
-          WRITE(OUT,1207) J,DTOP(J)
-          DO 720 I=1,NRUNS
-            WRITE(OUT,1205) I,TOPROW(ITOP(J),I),                          
-     &           (X(TOPROW(ITOP(J),I),K), K=1,COLS+BL)
- 720    CONTINUE                                                        
-      ENDIF                                                             
-      WRITE(OUT,1006)
+CC     IF (ITMAX .GT. 0) THEN
+CC        DO 720 J=1,ND
+CC          WRITE(OUT,1207) J,DTOP(J)
+CC          DO 720 I=1,NRUNS
+CC            WRITE(OUT,1205) I,TOPROW(ITOP(J),I),
+CC     &           (X(TOPROW(ITOP(J),I),K), K=1,COLS+BL)
+CC 720    CONTINUE
+CC      ENDIF
+CC      WRITE(OUT,1006)
  800  FORMAT(7X,' FORTRAN PROGRAM MD: BAYESIAN DESIGN OF EXPERIMENTS',/,                
      &3X,'FOLLOWUP DESIGN / WYNN EXCHANGE / RANDOM START',/,            
      &7X,'WRITTEN BY DAN MEYER',/,7X,'ALL RIGHTS RESERVED',/)

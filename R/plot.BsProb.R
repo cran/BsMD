@@ -1,4 +1,4 @@
-`plot.BsProb` <-
+plot.BsProb <-
 function (x, code = TRUE, prt = FALSE, cex.axis = par("cex.axis"), 
     ...) 
 {

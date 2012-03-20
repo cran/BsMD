@@ -1,4 +1,4 @@
-`DanielPlot` <-
+DanielPlot <-
 function (fit, code = FALSE, faclab = NULL, block = FALSE, datax = TRUE, 
     half = FALSE, pch = "*", cex.fac = par("cex.lab"), cex.lab = par("cex.lab"), 
     cex.pch = par("cex.axis"), ...) 

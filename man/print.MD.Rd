@@ -6,7 +6,7 @@
     best MD criterion set of runs and their MD for follow-up experiments.
 }
 \usage{
-print.MD(x, X = FALSE, resp = FALSE, Xcand = TRUE, models = TRUE, nMod = x$nMod,
+    \method{print}{MD}(x, X = FALSE, resp = FALSE, Xcand = TRUE, models = TRUE, nMod = x$nMod,
             digits = 3, verbose=FALSE, ...)
 }
 \arguments{

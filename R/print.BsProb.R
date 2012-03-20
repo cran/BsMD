@@ -1,4 +1,4 @@
-`print.BsProb` <-
+print.BsProb <-
 function (x, X = TRUE, resp = TRUE, factors = TRUE, models = TRUE, 
     nMod = 10, digits = 3, plt = FALSE, verbose = FALSE, ...) 
 {
@@ -41,7 +41,6 @@ function (x, X = TRUE, resp = TRUE, factors = TRUE, models = TRUE,
     print(round(calc, digits = digits))
     if (plt) 
         plot.BsProb(x, code = TRUE)
-    cat("\n Output file: BsPrint.out\n")
     if (factors) {
         if (x$INDGAM == 1) 
             cat("\n Weighted factor probabilities:\n")

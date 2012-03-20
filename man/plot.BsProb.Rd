@@ -5,7 +5,7 @@
 Method function for plotting marginal factor posterior probabilities for Bayesian screening.
 }
 \usage{
-    plot.BsProb(x, code = TRUE, prt = FALSE, cex.axis=par("cex.axis"), ...)
+    \method{plot}{BsProb}(x, code = TRUE, prt = FALSE, cex.axis=par("cex.axis"), ...)
 }
 \arguments{
   \item{x}{list. List of class \code{BsProb} output from the

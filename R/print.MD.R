@@ -1,4 +1,4 @@
-`print.MD` <-
+print.MD <-
 function (x, X = FALSE, resp = FALSE, Xcand = TRUE, models = TRUE, 
     nMod = x$nMod, digits = 3, verbose = FALSE, ...) 
 {
@@ -42,7 +42,6 @@ function (x, X = FALSE, resp = FALSE, Xcand = TRUE, models = TRUE,
         cat("\n Candidate runs:\n")
         print(round(x$Xcand, digits))
     }
-    cat("\n Search trace output file: MDPrint.out\n")
     if (any(x$D <= 0)) 
         ind <- min(which(x$D <= 0))
     else ind <- x$NTOP

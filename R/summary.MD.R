@@ -1,4 +1,4 @@
-`summary.MD` <-
+summary.MD <-
 function (object, digits = 3, verbose = FALSE, ...) 
 {
     if (verbose) {

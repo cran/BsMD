@@ -1,4 +1,4 @@
-`summary.BsProb` <-
+summary.BsProb <-
 function (object, nMod = 10, digits = 3, ...) 
 {
     nFac <- ncol(object$X) - object$blk

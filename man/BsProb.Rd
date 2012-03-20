@@ -94,7 +94,7 @@ application of Bayesian design and analysis of fractional factorial experiments,
 part of the \pkg{mdopt} bundle, available at \emph{StatLib}.
 }
 \seealso{
-    \code{\link{print.BsProb}}, \code{\link{plot.BsProb}}, \code{\link{summary.BsProb}}.
+    \code{\link{print.BsProb}}, \code{\link{print.BsProb}}, \code{\link{summary.BsProb}}.
 }
 \examples{
 library(BsMD)
