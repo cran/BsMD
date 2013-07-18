@@ -43,8 +43,7 @@ tried in the search limited to \code{mIter} iterations. If \code{mIter=0} then
 \code{startDes} user-provided designs are used. Posterior probabilities and
 variances of the competing models are obtained from \code{\link{BsProb}}.
 The function calls the \acronym{FORTRAN} subroutine \file{md} and captures
-summary results. The complete output of the \acronym{FORTRAN} code is save in
-the \file{MDPrint.out} file in the working directory.
+summary results. 
 }
 \value{
 A list with all input and output parameters of the \acronym{FORTRAN}

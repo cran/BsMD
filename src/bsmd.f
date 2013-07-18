@@ -152,7 +152,7 @@ C
      *G2INSQ,SR2,PGAMMA,PROBZERO,
      *RES(MAXN),
      *A(MAXN,MAXTERM),AA(MAXTERM,MAXTERM),NORM(MAXGAM),
-     *B(MAXTERM),PROB(MAXCOL,MAXGAM),SPROB(MAXGAM),PGAM(MAXGAM),
+     *B(MAXTERM),PROB(MAXGAM,MAXCOL),SPROB(MAXGAM),PGAM(MAXGAM),
      *Z(MAXTERM),PTOP(MAXNMD),SIGTOP(MAXNMD),PROB0(MAXGAM),
      *ATEM(MAXTERM,MAXTERM),DT(2)
 C
@@ -726,118 +726,118 @@ C
          GO TO 50                                                       
       ENDIF                                                             
       IF (L .LE. 0) ALL=.TRUE.                                          
-      RETURN                                                            
-      END                                                               
-C                                                                       
-      SUBROUTINE INITIA(J,R,MAXCOL)                                     
-C                                                                       
-C       INITIATES THE INTEGER VECTOR J TO THE FIRST VALUE               
-C       IN LEXICAL ORDER (1,2,3,...,R)                                  
-C                                                                       
-        INTEGER J(MAXCOL),R,I                                           
-         DO 401 I=1,R                                                   
- 401        J(I)=I                                                      
-         DO 402 I=R+1,MAXCOL                                            
+      RETURN
+      END
+C
+      SUBROUTINE INITIA(J,R,MAXCOL)
+C
+C       INITIATES THE INTEGER VECTOR J TO THE FIRST VALUE
+C       IN LEXICAL ORDER (1,2,3,...,R)
+C
+        INTEGER J(MAXCOL),R,I
+         DO 401 I=1,R
+ 401        J(I)=I
+         DO 402 I=R+1,MAXCOL
  402        J(I)=0
-      RETURN                                                            
-      END                                                               
-C                                                                       
+      RETURN
+      END
+C
       SUBROUTINE DPOCO(A,LDA,N,RCOND,Z,INFO)
-      INTEGER LDA,N,INFO                                                
-      DOUBLE PRECISION A(LDA,1),Z(1)                                    
-      DOUBLE PRECISION RCOND                                            
-C                                                                       
-C     DPOCO FACTORS A DOUBLE PRECISION SYMMETRIC POSITIVE DEFINITE      
-C     MATRIX AND ESTIMATES THE CONDITION OF THE MATRIX.                 
+      INTEGER LDA,N,INFO
+      DOUBLE PRECISION A(LDA,N),Z(N)
+      DOUBLE PRECISION RCOND
 C
-C     IF  RCOND  IS NOT NEEDED, DPOFA IS SLIGHTLY FASTER.               
-C     TO SOLVE  A*X = B , FOLLOW DPOCO BY DPOSL.                        
-C     TO COMPUTE  INVERSE(A)*C , FOLLOW DPOCO BY DPOSL.                 
-C     TO COMPUTE  DETERMINANT(A) , FOLLOW DPOCO BY DPODI.               
-C     TO COMPUTE  INVERSE(A) , FOLLOW DPOCO BY DPODI.                   
-C                                                                       
-C     ON ENTRY                                                          
-C                                                                       
-C        A       DOUBLE PRECISION(LDA, N)                               
+C     DPOCO FACTORS A DOUBLE PRECISION SYMMETRIC POSITIVE DEFINITE
+C     MATRIX AND ESTIMATES THE CONDITION OF THE MATRIX.
+C
+C     IF  RCOND  IS NOT NEEDED, DPOFA IS SLIGHTLY FASTER.
+C     TO SOLVE  A*X = B , FOLLOW DPOCO BY DPOSL.
+C     TO COMPUTE  INVERSE(A)*C , FOLLOW DPOCO BY DPOSL.
+C     TO COMPUTE  DETERMINANT(A) , FOLLOW DPOCO BY DPODI.
+C     TO COMPUTE  INVERSE(A) , FOLLOW DPOCO BY DPODI.
+C
+C     ON ENTRY
+C
+C        A       DOUBLE PRECISION(LDA, N)
 C                THE SYMMETRIC MATRIX TO BE FACTORED.  ONLY THE
-C                DIAGONAL AND UPPER TRIANGLE ARE USED.                  
+C                DIAGONAL AND UPPER TRIANGLE ARE USED.
 C
-C        LDA     INTEGER                                                
-C                THE LEADING DIMENSION OF THE ARRAY  A .                
+C        LDA     INTEGER
+C                THE LEADING DIMENSION OF THE ARRAY  A .
 C
-C        N       INTEGER                                                
-C                THE ORDER OF THE MATRIX  A .                           
-C                                                                       
-C     ON RETURN                                                         
-C                                                                       
-C        A       AN UPPER TRIANGULAR MATRIX  R  SO THAT  A = TRANS(R)*R 
-C                WHERE  TRANS(R)  IS THE TRANSPOSE.                     
-C                THE STRICT LOWER TRIANGLE IS UNALTERED.                
-C                IF  INFO .NE. 0 , THE FACTORIZATION IS NOT COMPLETE.   
-C                                                                       
-C        RCOND   DOUBLE PRECISION                                       
-C                AN ESTIMATE OF THE RECIPROCAL CONDITION OF  A .        
-C                FOR THE SYSTEM  A*X = B , RELATIVE PERTURBATIONS       
-C                IN  A  AND  B  OF SIZE  EPSILON  MAY CAUSE             
-C                RELATIVE PERTURBATIONS IN  X  OF SIZE  EPSILON/RCOND . 
-C                IF  RCOND  IS SO SMALL THAT THE LOGICAL EXPRESSION     
-C                           1.0 + RCOND .EQ. 1.0                        
-C                IS TRUE, THEN  A  MAY BE SINGULAR TO WORKING           
-C                PRECISION.  IN PARTICULAR,  RCOND  IS ZERO  IF         
+C        N       INTEGER
+C                THE ORDER OF THE MATRIX  A .
+C
+C     ON RETURN
+C
+C        A       AN UPPER TRIANGULAR MATRIX  R  SO THAT  A = TRANS(R)*R
+C                WHERE  TRANS(R)  IS THE TRANSPOSE.
+C                THE STRICT LOWER TRIANGLE IS UNALTERED.
+C                IF  INFO .NE. 0 , THE FACTORIZATION IS NOT COMPLETE.
+C
+C        RCOND   DOUBLE PRECISION
+C                AN ESTIMATE OF THE RECIPROCAL CONDITION OF  A .
+C                FOR THE SYSTEM  A*X = B , RELATIVE PERTURBATIONS
+C                IN  A  AND  B  OF SIZE  EPSILON  MAY CAUSE
+C                RELATIVE PERTURBATIONS IN  X  OF SIZE  EPSILON/RCOND .
+C                IF  RCOND  IS SO SMALL THAT THE LOGICAL EXPRESSION
+C                           1.0 + RCOND .EQ. 1.0
+C                IS TRUE, THEN  A  MAY BE SINGULAR TO WORKING
+C                PRECISION.  IN PARTICULAR,  RCOND  IS ZERO  IF
 C                EXACT SINGULARITY IS DETECTED OR THE ESTIMATE
-C                UNDERFLOWS.  IF INFO .NE. 0 , RCOND IS UNCHANGED.      
-C                                                                       
-C        Z       DOUBLE PRECISION(N)
-C                A WORK VECTOR WHOSE CONTENTS ARE USUALLY UNIMPORTANT.  
-C                IF  A  IS CLOSE TO A SINGULAR MATRIX, THEN  Z  IS
-C                AN APPROXIMATE NULL VECTOR IN THE SENSE THAT           
-C                NORM(A*Z) = RCOND*NORM(A)*NORM(Z) .                    
-C                IF  INFO .NE. 0 , Z  IS UNCHANGED.                     
-C                                                                       
-C        INFO    INTEGER                                                
-C                = 0  FOR NORMAL RETURN.                                
-C                = K  SIGNALS AN ERROR CONDITION.  THE LEADING MINOR
-C                     OF ORDER  K  IS NOT POSITIVE DEFINITE.            
-C                                                                       
-C     LINPACK.  THIS VERSION DATED 08/14/78 .                           
-C     CLEVE MOLER, UNIVERSITY OF NEW MEXICO, ARGONNE NATIONAL LAB.      
-C                                                                       
-C     SUBROUTINES AND FUNCTIONS                                         
-C                                                                       
-C     LINPACK DPOFA                                                     
-C     BLAS DAXPY,DDOT,DSCAL,DASUM                                       
-C     FORTRAN DABS,DMAX1,DREAL,DSIGN
-C                                                                       
-C     INTERNAL VARIABLES                                                
-C                                                                       
-      DOUBLE PRECISION DDOT,EK,T,WK,WKM
-      DOUBLE PRECISION ANORM,S,DASUM,SM,YNORM                           
-      INTEGER I,J,JM1,K,KB,KP1                                          
-C                                                                       
-C                                                                       
-C     FIND NORM OF A USING ONLY UPPER HALF                              
-C                                                                       
-      DO 30 J = 1, N                                                    
-         Z(J) = DASUM(J,A(1,J),1)                                       
-         JM1 = J - 1                                                    
-         IF (JM1 .LT. 1) GO TO 20                                       
-         DO 10 I = 1, JM1                                               
-            Z(I) = Z(I) + DABS(A(I,J))                                  
-   10    CONTINUE                                                       
-   20    CONTINUE                                                       
-   30 CONTINUE                                                          
-      ANORM = 0.0D0                                                     
-      DO 40 J = 1, N                                                    
-         ANORM = DMAX1(ANORM,Z(J))                                      
-   40 CONTINUE                                                          
+C                UNDERFLOWS.  IF INFO .NE. 0 , RCOND IS UNCHANGED.
 C
-C     FACTOR                                                            
-C                                                                       
-      CALL DPOFA(A,LDA,N,INFO)                                          
+C        Z       DOUBLE PRECISION(N)
+C                A WORK VECTOR WHOSE CONTENTS ARE USUALLY UNIMPORTANT.
+C                IF  A  IS CLOSE TO A SINGULAR MATRIX, THEN  Z  IS
+C                AN APPROXIMATE NULL VECTOR IN THE SENSE THAT
+C                NORM(A*Z) = RCOND*NORM(A)*NORM(Z) .
+C                IF  INFO .NE. 0 , Z  IS UNCHANGED.
+C
+C        INFO    INTEGER
+C                = 0  FOR NORMAL RETURN.
+C                = K  SIGNALS AN ERROR CONDITION.  THE LEADING MINOR
+C                     OF ORDER  K  IS NOT POSITIVE DEFINITE.
+C
+C     LINPACK.  THIS VERSION DATED 08/14/78 .
+C     CLEVE MOLER, UNIVERSITY OF NEW MEXICO, ARGONNE NATIONAL LAB.
+C
+C     SUBROUTINES AND FUNCTIONS
+C
+C     LINPACK DPOFA
+C     BLAS DAXPY,DDOT,DSCAL,DASUM
+C     FORTRAN DABS,DMAX1,DREAL,DSIGN
+C
+C     INTERNAL VARIABLES
+C
+      DOUBLE PRECISION DDOT,EK,T,WK,WKM
+      DOUBLE PRECISION ANORM,S,DASUM,SM,YNORM
+      INTEGER I,J,JM1,K,KB,KP1
+C
+C
+C     FIND NORM OF A USING ONLY UPPER HALF
+C
+      DO 30 J = 1, N
+         Z(J) = DASUM(J,A(1,J),1)
+         JM1 = J - 1
+         IF (JM1 .LT. 1) GO TO 20
+         DO 10 I = 1, JM1
+            Z(I) = Z(I) + DABS(A(I,J))
+   10    CONTINUE
+   20    CONTINUE
+   30 CONTINUE
+      ANORM = 0.0D0
+      DO 40 J = 1, N
+         ANORM = DMAX1(ANORM,Z(J))
+   40 CONTINUE
+C
+C     FACTOR
+C
+      CALL DPOFA(A,LDA,N,INFO)
       IF (INFO .NE. 0) GO TO 180
-C                                                                       
+C
 C        RCOND = 1/(NORM(A)*(ESTIMATE OF NORM(INVERSE(A)))) .
-C        ESTIMATE = NORM(Z)/NORM(Y) WHERE  A*Z = Y  AND  A*Y = E .      
+C        ESTIMATE = NORM(Z)/NORM(Y) WHERE  A*Z = Y  AND  A*Y = E .
 C        THE COMPONENTS OF  E  ARE CHOSEN TO CAUSE MAXIMUM LOCAL        
 C        GROWTH IN THE ELEMENTS OF W  WHERE  TRANS(R)*W = E .           
 C        THE VECTORS ARE FREQUENTLY RESCALED TO AVOID OVERFLOW.         
@@ -861,7 +861,7 @@ C
             SM = DABS(WKM)                                              
             WK = WK/A(K,K)                                              
             WKM = WKM/A(K,K)                                            
-            KP1 = K + 1                                                 
+            KP1 = K + 1
             IF (KP1 .GT. N) GO TO 100                                   
                DO 70 J = KP1, N                                         
                   SM = SM + DABS(Z(J)+WKM*A(K,J))                       
@@ -898,7 +898,7 @@ C
 C                                                                       
          YNORM = 1.0D0
 C                                                                       
-C        SOLVE TRANS(R)*V = Y                                           
+C        SOLVE TRANS(R)*V = Y
 C                                                                       
          DO 150 K = 1, N
             Z(K) = Z(K) - DDOT(K-1,A(1,K),1,Z(1),1)                     
@@ -935,81 +935,81 @@ C
          IF (ANORM .EQ. 0.0D0) RCOND = 0.0D0                            
   180 CONTINUE                                                          
       RETURN                                                            
-      END                                                               
-      SUBROUTINE DPODI(A,LDA,N,DET,JOB)                                 
+      END
+      SUBROUTINE DPODI(A,LDA,N,DET,JOB)
       INTEGER LDA,N,JOB
-      DOUBLE PRECISION A(LDA,1)                                         
-      DOUBLE PRECISION DET(2)                                           
-C                                                                       
+      DOUBLE PRECISION A(LDA,N)
+      DOUBLE PRECISION DET(2)
+C
 C     DPODI COMPUTES THE DETERMINANT AND INVERSE OF A CERTAIN
-C     DOUBLE PRECISION SYMMETRIC POSITIVE DEFINITE MATRIX (SEE BELOW)   
-C     USING THE FACTORS COMPUTED BY DPOCO, DPOFA OR DQRDC.              
-C                                                                       
-C     ON ENTRY                                                          
-C                                                                       
+C     DOUBLE PRECISION SYMMETRIC POSITIVE DEFINITE MATRIX (SEE BELOW)
+C     USING THE FACTORS COMPUTED BY DPOCO, DPOFA OR DQRDC.
+C
+C     ON ENTRY
+C
 C        A       DOUBLE PRECISION(LDA, N)
 C                THE OUTPUT  A  FROM DPOCO OR DPOFA
-C                OR THE OUTPUT  X  FROM DQRDC.                          
-C                                                                       
-C        LDA     INTEGER                                                
-C                THE LEADING DIMENSION OF THE ARRAY  A .                
-C                                                                       
-C        N       INTEGER                                                
-C                THE ORDER OF THE MATRIX  A .                           
-C                                                                       
-C        JOB     INTEGER                                                
-C                = 11   BOTH DETERMINANT AND INVERSE.                   
-C                = 01   INVERSE ONLY.                                   
-C                = 10   DETERMINANT ONLY.                               
-C                                                                       
-C     ON RETURN                                                         
-C                                                                       
-C        A       IF DPOCO OR DPOFA WAS USED TO FACTOR  A  THEN          
-C                DPODI PRODUCES THE UPPER HALF OF INVERSE(A) .          
-C                IF DQRDC WAS USED TO DECOMPOSE  X  THEN                
-C                DPODI PRODUCES THE UPPER HALF OF INVERSE(TRANS(X)*X)   
+C                OR THE OUTPUT  X  FROM DQRDC.
+C
+C        LDA     INTEGER
+C                THE LEADING DIMENSION OF THE ARRAY  A .
+C
+C        N       INTEGER
+C                THE ORDER OF THE MATRIX  A .
+C
+C        JOB     INTEGER
+C                = 11   BOTH DETERMINANT AND INVERSE.
+C                = 01   INVERSE ONLY.
+C                = 10   DETERMINANT ONLY.
+C
+C     ON RETURN
+C
+C        A       IF DPOCO OR DPOFA WAS USED TO FACTOR  A  THEN
+C                DPODI PRODUCES THE UPPER HALF OF INVERSE(A) .
+C                IF DQRDC WAS USED TO DECOMPOSE  X  THEN
+C                DPODI PRODUCES THE UPPER HALF OF INVERSE(TRANS(X)*X)
 C                WHERE TRANS(X) IS THE TRANSPOSE.
-C                ELEMENTS OF  A  BELOW THE DIAGONAL ARE UNCHANGED.      
-C                IF THE UNITS DIGIT OF JOB IS ZERO,  A  IS UNCHANGED.   
-C                                                                       
-C        DET     DOUBLE PRECISION(2)                                    
-C                DETERMINANT OF  A  OR OF  TRANS(X)*X  IF REQUESTED.    
-C                OTHERWISE NOT REFERENCED.                              
-C                DETERMINANT = DET(1) * 10.0**DET(2)                    
-C                WITH  1.0 .LE. DET(1) .LT. 10.0                        
+C                ELEMENTS OF  A  BELOW THE DIAGONAL ARE UNCHANGED.
+C                IF THE UNITS DIGIT OF JOB IS ZERO,  A  IS UNCHANGED.
+C
+C        DET     DOUBLE PRECISION(2)
+C                DETERMINANT OF  A  OR OF  TRANS(X)*X  IF REQUESTED.
+C                OTHERWISE NOT REFERENCED.
+C                DETERMINANT = DET(1) * 10.0**DET(2)
+C                WITH  1.0 .LE. DET(1) .LT. 10.0
 C                OR  DET(1) .EQ. 0.0 .
-C                                                                       
-C     ERROR CONDITION                                                   
-C                                                                       
-C        A DIVISION BY ZERO WILL OCCUR IF THE INPUT FACTOR CONTAINS     
-C        A ZERO ON THE DIAGONAL AND THE INVERSE IS REQUESTED.           
-C        IT WILL NOT OCCUR IF THE SUBROUTINES ARE CALLED CORRECTLY      
+C
+C     ERROR CONDITION
+C
+C        A DIVISION BY ZERO WILL OCCUR IF THE INPUT FACTOR CONTAINS
+C        A ZERO ON THE DIAGONAL AND THE INVERSE IS REQUESTED.
+C        IT WILL NOT OCCUR IF THE SUBROUTINES ARE CALLED CORRECTLY
 C        AND IF DPOCO OR DPOFA HAS SET INFO .EQ. 0 .
-C                                                                       
+C
 C     LINPACK.  THIS VERSION DATED 08/14/78 .
-C     CLEVE MOLER, UNIVERSITY OF NEW MEXICO, ARGONNE NATIONAL LAB.      
-C                                                                       
-C     SUBROUTINES AND FUNCTIONS                                         
-C                                                                       
-C     BLAS DAXPY,DSCAL                                                  
-C     FORTRAN MOD                                                       
-C                                                                       
+C     CLEVE MOLER, UNIVERSITY OF NEW MEXICO, ARGONNE NATIONAL LAB.
+C
+C     SUBROUTINES AND FUNCTIONS
+C
+C     BLAS DAXPY,DSCAL
+C     FORTRAN MOD
+C
 C     INTERNAL VARIABLES
-C                                                                       
-      DOUBLE PRECISION T                                                
-      DOUBLE PRECISION S                                                
-      INTEGER I,J,JM1,K,KP1                                             
-C                                                                       
-C     COMPUTE DETERMINANT                                               
-C                                                                       
-      IF (JOB/10 .EQ. 0) GO TO 70                                       
-         DET(1) = 1.0D0                                                 
-         DET(2) = 0.0D0                                                 
-         S = 10.0D0                                                     
-         DO 50 I = 1, N                                                 
-            DET(1) = A(I,I)**2*DET(1)                                   
+C
+      DOUBLE PRECISION T
+      DOUBLE PRECISION S
+      INTEGER I,J,JM1,K,KP1
+C
+C     COMPUTE DETERMINANT
+C
+      IF (JOB/10 .EQ. 0) GO TO 70
+         DET(1) = 1.0D0
+         DET(2) = 0.0D0
+         S = 10.0D0
+         DO 50 I = 1, N
+            DET(1) = A(I,I)**2*DET(1)
 C        ...EXIT                                                        
-            IF (DET(1) .EQ. 0.0D0) GO TO 60                             
+            IF (DET(1) .EQ. 0.0D0) GO TO 60
    10       IF (DET(1) .GE. 1.0D0) GO TO 20                             
                DET(1) = S*DET(1)                                        
                DET(2) = DET(2) - 1.0D0                                  
@@ -1046,7 +1046,7 @@ C
          DO 130 J = 1, N                                                
             JM1 = J - 1                                                 
             IF (JM1 .LT. 1) GO TO 120                                   
-            DO 110 K = 1, JM1                                           
+            DO 110 K = 1, JM1
                T = A(K,J)                                               
                CALL DAXPY(K,T,A(1,J),1,A(1,K),1)                        
   110       CONTINUE                                                    
@@ -1055,230 +1055,230 @@ C
             CALL DSCAL(J,T,A(1,J),1)                                    
   130    CONTINUE                                                       
   140 CONTINUE                                                          
-      RETURN                                                            
-      END                                                               
-      SUBROUTINE DPOSL(A,LDA,N,B)                                       
-      INTEGER LDA,N                                                     
-      DOUBLE PRECISION A(LDA,1),B(1)                                    
+      RETURN
+      END
+      SUBROUTINE DPOSL(A,LDA,N,B)
+      INTEGER LDA,N
+      DOUBLE PRECISION A(LDA,N),B(N)
 C
-C     DPOSL SOLVES THE DOUBLE PRECISION SYMMETRIC POSITIVE DEFINITE     
-C     SYSTEM A * X = B                                                  
-C     USING THE FACTORS COMPUTED BY DPOCO OR DPOFA.                     
-C                                                                       
-C     ON ENTRY                                                          
-C                                                                       
-C        A       DOUBLE PRECISION(LDA, N)                               
-C                THE OUTPUT FROM DPOCO OR DPOFA.                        
-C                                                                       
-C        LDA     INTEGER                                                
+C     DPOSL SOLVES THE DOUBLE PRECISION SYMMETRIC POSITIVE DEFINITE
+C     SYSTEM A * X = B
+C     USING THE FACTORS COMPUTED BY DPOCO OR DPOFA.
+C
+C     ON ENTRY
+C
+C        A       DOUBLE PRECISION(LDA, N)
+C                THE OUTPUT FROM DPOCO OR DPOFA.
+C
+C        LDA     INTEGER
 C                THE LEADING DIMENSION OF THE ARRAY  A .
-C                                                                       
-C        N       INTEGER                                                
-C                THE ORDER OF THE MATRIX  A .                           
-C                                                                       
-C        B       DOUBLE PRECISION(N)
-C                THE RIGHT HAND SIDE VECTOR.                            
 C
-C     ON RETURN                                                         
-C                                                                       
-C        B       THE SOLUTION VECTOR  X .                               
-C                                                                       
-C     ERROR CONDITION                                                   
-C                                                                       
-C        A DIVISION BY ZERO WILL OCCUR IF THE INPUT FACTOR CONTAINS     
+C        N       INTEGER
+C                THE ORDER OF THE MATRIX  A .
+C
+C        B       DOUBLE PRECISION(N)
+C                THE RIGHT HAND SIDE VECTOR.
+C
+C     ON RETURN
+C
+C        B       THE SOLUTION VECTOR  X .
+C
+C     ERROR CONDITION
+C
+C        A DIVISION BY ZERO WILL OCCUR IF THE INPUT FACTOR CONTAINS
 C        A ZERO ON THE DIAGONAL.  TECHNICALLY THIS INDICATES
-C        SINGULARITY BUT IT IS USUALLY CAUSED BY IMPROPER SUBROUTINE    
+C        SINGULARITY BUT IT IS USUALLY CAUSED BY IMPROPER SUBROUTINE
 C        ARGUMENTS.  IT WILL NOT OCCUR IF THE SUBROUTINES ARE CALLED
-C        CORRECTLY AND  INFO .EQ. 0 .                                   
-C                                                                       
-C     TO COMPUTE  INVERSE(A) * C  WHERE  C  IS A MATRIX                 
-C     WITH  P  COLUMNS                                                  
-C           CALL DPOCO(A,LDA,N,RCOND,Z,INFO)                            
-C           IF (RCOND IS TOO SMALL .OR. INFO .NE. 0) GO TO ...          
-C           DO 10 J = 1, P                                              
-C              CALL DPOSL(A,LDA,N,C(1,J))                               
-C        10 CONTINUE                                                    
-C                                                                       
-C     LINPACK.  THIS VERSION DATED 08/14/78 .                           
-C     CLEVE MOLER, UNIVERSITY OF NEW MEXICO, ARGONNE NATIONAL LAB.      
-C                                                                       
-C     SUBROUTINES AND FUNCTIONS                                         
-C                                                                       
-C     BLAS DAXPY,DDOT                                                   
-C                                                                       
+C        CORRECTLY AND  INFO .EQ. 0 .
+C
+C     TO COMPUTE  INVERSE(A) * C  WHERE  C  IS A MATRIX
+C     WITH  P  COLUMNS
+C           CALL DPOCO(A,LDA,N,RCOND,Z,INFO)
+C           IF (RCOND IS TOO SMALL .OR. INFO .NE. 0) GO TO ...
+C           DO 10 J = 1, P
+C              CALL DPOSL(A,LDA,N,C(1,J))
+C        10 CONTINUE
+C
+C     LINPACK.  THIS VERSION DATED 08/14/78 .
+C     CLEVE MOLER, UNIVERSITY OF NEW MEXICO, ARGONNE NATIONAL LAB.
+C
+C     SUBROUTINES AND FUNCTIONS
+C
+C     BLAS DAXPY,DDOT
+C
 C     INTERNAL VARIABLES
-C                                                                       
-      DOUBLE PRECISION DDOT,T                                           
-      INTEGER K,KB                                                      
-C                                                                       
-C     SOLVE TRANS(R)*Y = B                                              
-C                                                                       
-      DO 10 K = 1, N                                                    
-         T = DDOT(K-1,A(1,K),1,B(1),1)                                  
+C
+      DOUBLE PRECISION DDOT,T
+      INTEGER K,KB
+C
+C     SOLVE TRANS(R)*Y = B
+C
+      DO 10 K = 1, N
+         T = DDOT(K-1,A(1,K),1,B(1),1)
          B(K) = (B(K) - T)/A(K,K)                                       
    10 CONTINUE                                                          
 C                                                                       
 C     SOLVE R*X = Y
 C                                                                       
-      DO 20 KB = 1, N                                                   
+      DO 20 KB = 1, N
          K = N + 1 - KB
          B(K) = B(K)/A(K,K)                                             
          T = -B(K)                                                      
          CALL DAXPY(K-1,T,A(1,K),1,B(1),1)                              
    20 CONTINUE
       RETURN                                                            
-      END                                                               
-C                                                                       
-      SUBROUTINE DPOFA(A,LDA,N,INFO)                                    
-      INTEGER LDA,N,INFO                                                
-      DOUBLE PRECISION A(LDA,1)                                         
+      END
 C
-C     DPOFA FACTORS A DOUBLE PRECISION SYMMETRIC POSITIVE DEFINITE      
-C     MATRIX.                                                           
+      SUBROUTINE DPOFA(A,LDA,N,INFO)
+      INTEGER LDA,N,INFO
+      DOUBLE PRECISION A(LDA,N)
 C
-C     DPOFA IS USUALLY CALLED BY DPOCO, BUT IT CAN BE CALLED            
-C     DIRECTLY WITH A SAVING IN TIME IF  RCOND  IS NOT NEEDED.          
-C     (TIME FOR DPOCO) = (1 + 18/N)*(TIME FOR DPOFA) .                  
-C                                                                       
-C     ON ENTRY                                                          
-C                                                                       
-C        A       DOUBLE PRECISION(LDA, N)                               
-C                THE SYMMETRIC MATRIX TO BE FACTORED.  ONLY THE         
-C                DIAGONAL AND UPPER TRIANGLE ARE USED.                  
-C                                                                       
-C        LDA     INTEGER                                                
-C                THE LEADING DIMENSION OF THE ARRAY  A .                
-C                                                                       
-C        N       INTEGER                                                
-C                THE ORDER OF THE MATRIX  A .                           
-C                                                                       
+C     DPOFA FACTORS A DOUBLE PRECISION SYMMETRIC POSITIVE DEFINITE
+C     MATRIX.
+C
+C     DPOFA IS USUALLY CALLED BY DPOCO, BUT IT CAN BE CALLED
+C     DIRECTLY WITH A SAVING IN TIME IF  RCOND  IS NOT NEEDED.
+C     (TIME FOR DPOCO) = (1 + 18/N)*(TIME FOR DPOFA) .
+C
+C     ON ENTRY
+C
+C        A       DOUBLE PRECISION(LDA, N)
+C                THE SYMMETRIC MATRIX TO BE FACTORED.  ONLY THE
+C                DIAGONAL AND UPPER TRIANGLE ARE USED.
+C
+C        LDA     INTEGER
+C                THE LEADING DIMENSION OF THE ARRAY  A .
+C
+C        N       INTEGER
+C                THE ORDER OF THE MATRIX  A .
+C
 C     ON RETURN
-C                                                                       
-C        A       AN UPPER TRIANGULAR MATRIX  R  SO THAT  A = TRANS(R)*R 
-C                WHERE  TRANS(R)  IS THE TRANSPOSE.                     
-C                THE STRICT LOWER TRIANGLE IS UNALTERED.                
-C                IF  INFO .NE. 0 , THE FACTORIZATION IS NOT COMPLETE.   
-C                                                                       
-C        INFO    INTEGER                                                
-C                = 0  FOR NORMAL RETURN.                                
-C                = K  SIGNALS AN ERROR CONDITION.  THE LEADING MINOR    
-C                     OF ORDER  K  IS NOT POSITIVE DEFINITE.            
-C                                                                       
-C     LINPACK.  THIS VERSION DATED 08/14/78 .                           
+C
+C        A       AN UPPER TRIANGULAR MATRIX  R  SO THAT  A = TRANS(R)*R
+C                WHERE  TRANS(R)  IS THE TRANSPOSE.
+C                THE STRICT LOWER TRIANGLE IS UNALTERED.
+C                IF  INFO .NE. 0 , THE FACTORIZATION IS NOT COMPLETE.
+C
+C        INFO    INTEGER
+C                = 0  FOR NORMAL RETURN.
+C                = K  SIGNALS AN ERROR CONDITION.  THE LEADING MINOR
+C                     OF ORDER  K  IS NOT POSITIVE DEFINITE.
+C
+C     LINPACK.  THIS VERSION DATED 08/14/78 .
 C     CLEVE MOLER, UNIVERSITY OF NEW MEXICO, ARGONNE NATIONAL LAB.
 C
-C     SUBROUTINES AND FUNCTIONS                                         
-C                                                                       
-C     BLAS DDOT                                                         
-C     FORTRAN DSQRT                                                     
-C                                                                       
-C     INTERNAL VARIABLES
-C                                                                       
-      DOUBLE PRECISION DDOT,T                                           
-      DOUBLE PRECISION S                                                
-      INTEGER J,JM1,K                                                   
-C     BEGIN BLOCK WITH ...EXITS TO 40                                   
+C     SUBROUTINES AND FUNCTIONS
 C
-C                                                                       
-         DO 30 J = 1, N                                                 
-            INFO = J                                                    
+C     BLAS DDOT
+C     FORTRAN DSQRT
+C
+C     INTERNAL VARIABLES
+C
+      DOUBLE PRECISION DDOT,T
+      DOUBLE PRECISION S
+      INTEGER J,JM1,K
+C     BEGIN BLOCK WITH ...EXITS TO 40
+C
+C
+         DO 30 J = 1, N
+            INFO = J
             S = 0.0D0
-            JM1 = J - 1                                                 
-            IF (JM1 .LT. 1) GO TO 20                                    
-            DO 10 K = 1, JM1                                            
-               T = A(K,J) - DDOT(K-1,A(1,K),1,A(1,J),1)                 
-               T = T/A(K,K)                                             
-               A(K,J) = T                                               
-               S = S + T*T                                              
+            JM1 = J - 1
+            IF (JM1 .LT. 1) GO TO 20
+            DO 10 K = 1, JM1
+               T = A(K,J) - DDOT(K-1,A(1,K),1,A(1,J),1)
+               T = T/A(K,K)
+               A(K,J) = T
+               S = S + T*T
    10       CONTINUE                                                    
    20       CONTINUE                                                    
             S = A(J,J) - S                                              
 C       ....EXIT                                                        
-            IF (S .LE. 0.0D0) GO TO 40                                  
+            IF (S .LE. 0.0D0) GO TO 40
             A(J,J) = DSQRT(S)                                           
    30    CONTINUE                                                       
-         INFO = 0                                                       
+         INFO = 0
    40 CONTINUE
-      RETURN                                                            
-      END                                                               
-C                                                                       
-      DOUBLE PRECISION FUNCTION DASUM(N,DX,INCX)                        
-C                                                                       
-C     RETURNS SUM OF MAGNITUDES OF DOUBLE PRECISION DX.                 
-C     DASUM = SUM FROM 0 TO N-1 OF DABS(DX(1+I*INCX))                   
-C                                                                       
-      DOUBLE PRECISION DX(1)                                            
-      DASUM = 0.D0                                                      
-      IF(N.LE.0)RETURN                                                  
-      IF(INCX.EQ.1)GOTO 20                                              
+      RETURN
+      END
+C
+      DOUBLE PRECISION FUNCTION DASUM(N,DX,INCX)
+C
+C     RETURNS SUM OF MAGNITUDES OF DOUBLE PRECISION DX.
+C     DASUM = SUM FROM 0 TO N-1 OF DABS(DX(1+I*INCX))
+C
+      DOUBLE PRECISION DX(N)
+      DASUM = 0.D0
+      IF(N.LE.0)RETURN
+      IF(INCX.EQ.1)GOTO 20
 C
 C        CODE FOR INCREMENTS NOT EQUAL TO 1.
-C                                                                       
-      NS = N*INCX                                                       
-          DO 10 I=1,NS,INCX                                             
-          DASUM = DASUM + DABS(DX(I))                                   
-   10     CONTINUE                                                      
-      RETURN                                                            
 C
-C        CODE FOR INCREMENTS EQUAL TO 1.                                
-C                                                                       
-C                                                                       
-C        CLEAN-UP LOOP SO REMAINING VECTOR LENGTH IS A MULTIPLE OF 6.   
+      NS = N*INCX
+          DO 10 I=1,NS,INCX
+          DASUM = DASUM + DABS(DX(I))
+   10     CONTINUE
+      RETURN
 C
-   20 M = MOD(N,6)                                                      
-      IF( M .EQ. 0 ) GO TO 40                                           
-      DO 30 I = 1,M                                                     
-         DASUM = DASUM + DABS(DX(I))                                    
+C        CODE FOR INCREMENTS EQUAL TO 1.
+C
+C
+C        CLEAN-UP LOOP SO REMAINING VECTOR LENGTH IS A MULTIPLE OF 6.
+C
+   20 M = MOD(N,6)
+      IF( M .EQ. 0 ) GO TO 40
+      DO 30 I = 1,M
+         DASUM = DASUM + DABS(DX(I))
    30 CONTINUE
       IF( N .LT. 6 ) RETURN                                             
-   40 MP1 = M + 1                                                       
+   40 MP1 = M + 1
       DO 50 I = MP1,N,6                                                 
          DASUM = DASUM + DABS(DX(I)) + DABS(DX(I+1)) + DABS(DX(I+2))    
-     1   + DABS(DX(I+3)) + DABS(DX(I+4)) + DABS(DX(I+5))                
-   50 CONTINUE                                                          
-      RETURN                                                            
-      END                                                               
-C                                                                       
-      SUBROUTINE DAXPY(N,DA,DX,INCX,DY,INCY)                            
-C                                                                       
-C     OVERWRITE DOUBLE PRECISION DY WITH DOUBLE PRECISION DA*DX + DY.   
-C     FOR I = 0 TO N-1, REPLACE  DY(LY+I*INCY) WITH DA*DX(LX+I*INCX) +  
+     1   + DABS(DX(I+3)) + DABS(DX(I+4)) + DABS(DX(I+5))
+   50 CONTINUE
+      RETURN
+      END
+C
+      SUBROUTINE DAXPY(N,DA,DX,INCX,DY,INCY)
+C
+C     OVERWRITE DOUBLE PRECISION DY WITH DOUBLE PRECISION DA*DX + DY.
+C     FOR I = 0 TO N-1, REPLACE  DY(LY+I*INCY) WITH DA*DX(LX+I*INCX) +
 C       DY(LY+I*INCY), WHERE LX = 1 IF INCX .GE. 0, ELSE LX = (-INCX)*N,
 C       AND LY IS DEFINED IN A SIMILAR WAY USING INCY.
-C                                                                       
-      DOUBLE PRECISION DX(1),DY(1),DA                                   
-      IF(N.LE.0.OR.DA.EQ.0.D0) RETURN                                   
-      IF(INCX.EQ.INCY) IF(INCX-1) 5,20,60                               
-    5 CONTINUE                                                          
-C                                                                       
-C        CODE FOR NONEQUAL OR NONPOSITIVE INCREMENTS.                   
-C                                                                       
-      IX = 1                                                            
-      IY = 1                                                            
-      IF(INCX.LT.0)IX = (-N+1)*INCX + 1                                 
-      IF(INCY.LT.0)IY = (-N+1)*INCY + 1
-      DO 10 I = 1,N                                                     
-        DY(IY) = DY(IY) + DA*DX(IX)                                     
-        IX = IX + INCX
-        IY = IY + INCY                                                  
-   10 CONTINUE                                                          
-      RETURN                                                            
-C                                                                       
-C        CODE FOR BOTH INCREMENTS EQUAL TO 1                            
-C                                                                       
 C
-C        CLEAN-UP LOOP SO REMAINING VECTOR LENGTH IS A MULTIPLE OF 4.   
-C                                                                       
-   20 M = MOD(N,4)                                                      
+      DOUBLE PRECISION DX(N),DY(N),DA
+      IF(N.LE.0.OR.DA.EQ.0.D0) RETURN
+      IF(INCX.EQ.INCY) IF(INCX-1) 5,20,60
+    5 CONTINUE
+C
+C        CODE FOR NONEQUAL OR NONPOSITIVE INCREMENTS.
+C
+      IX = 1
+      IY = 1
+      IF(INCX.LT.0)IX = (-N+1)*INCX + 1
+      IF(INCY.LT.0)IY = (-N+1)*INCY + 1
+      DO 10 I = 1,N
+        DY(IY) = DY(IY) + DA*DX(IX)
+        IX = IX + INCX
+        IY = IY + INCY
+   10 CONTINUE
+      RETURN
+C
+C        CODE FOR BOTH INCREMENTS EQUAL TO 1
+C
+C
+C        CLEAN-UP LOOP SO REMAINING VECTOR LENGTH IS A MULTIPLE OF 4.
+C
+   20 M = MOD(N,4)
       IF( M .EQ. 0 ) GO TO 40
-      DO 30 I = 1,M                                                     
-        DY(I) = DY(I) + DA*DX(I)                                        
+      DO 30 I = 1,M
+        DY(I) = DY(I) + DA*DX(I)
    30 CONTINUE                                                          
       IF( N .LT. 4 ) RETURN                                             
    40 MP1 = M + 1                                                       
       DO 50 I = MP1,N,4
         DY(I) = DY(I) + DA*DX(I)                                        
-        DY(I + 1) = DY(I + 1) + DA*DX(I + 1)                            
+        DY(I + 1) = DY(I + 1) + DA*DX(I + 1)
         DY(I + 2) = DY(I + 2) + DA*DX(I + 2)                            
         DY(I + 3) = DY(I + 3) + DA*DX(I + 3)                            
    50 CONTINUE                                                          
@@ -1297,21 +1297,21 @@ C
       DOUBLE PRECISION FUNCTION DDOT(N,DX,INCX,DY,INCY)                 
 C                                                                       
 C     RETURNS THE DOT PRODUCT OF DOUBLE PRECISION DX AND DY.            
-C     DDOT = SUM FOR I = 0 TO N-1 OF  DX(LX+I*INCX) * DY(LY+I*INCY)     
+C     DDOT = SUM FOR I = 0 TO N-1 OF  DX(LX+I*INCX) * DY(LY+I*INCY)
 C     WHERE LX = 1 IF INCX .GE. 0, ELSE LX = (-INCX)*N, AND LY IS       
-C     DEFINED IN A SIMILAR WAY USING INCY.                              
+C     DEFINED IN A SIMILAR WAY USING INCY.
 C                                                                       
-      DOUBLE PRECISION DX(1),DY(1)
+      DOUBLE PRECISION DX(N),DY(N)
       DDOT = 0.D0                                                       
       IF(N.LE.0)RETURN                                                  
       IF(INCX.EQ.INCY) IF(INCX-1) 5,20,60                               
-    5 CONTINUE                                                          
+    5 CONTINUE
 C
 C         CODE FOR UNEQUAL OR NONPOSITIVE INCREMENTS.                   
 C                                                                       
       IX = 1                                                            
       IY = 1                                                            
-      IF(INCX.LT.0)IX = (-N+1)*INCX + 1                                 
+      IF(INCX.LT.0)IX = (-N+1)*INCX + 1
       IF(INCY.LT.0)IY = (-N+1)*INCY + 1                                 
       DO 10 I = 1,N
          DDOT = DDOT + DX(IX)*DY(IY)                                    
@@ -1328,7 +1328,7 @@ C
    20 M = MOD(N,5)                                                      
       IF( M .EQ. 0 ) GO TO 40                                           
       DO 30 I = 1,M                                                     
-         DDOT = DDOT + DX(I)*DY(I)                                      
+         DDOT = DDOT + DX(I)*DY(I)
    30 CONTINUE                                                          
       IF( N .LT. 5 ) RETURN                                             
    40 MP1 = M + 1                                                       
@@ -1342,7 +1342,7 @@ C         CODE FOR POSITIVE EQUAL INCREMENTS .NE.1.
 C                                                                       
    60 CONTINUE                                                          
       NS = N*INCX                                                       
-          DO 70 I=1,NS,INCX                                             
+          DO 70 I=1,NS,INCX
           DDOT = DDOT + DX(I)*DY(I)                                     
    70     CONTINUE                                                      
       RETURN                                                            
@@ -1353,7 +1353,7 @@ C
 C     REPLACE DOUBLE PRECISION DX BY DOUBLE PRECISION DA*DX.            
 C     FOR I = 0 TO N-1, REPLACE DX(1+I*INCX) WITH  DA * DX(1+I*INCX)    
 C                                                                       
-      DOUBLE PRECISION DA,DX(1)
+      DOUBLE PRECISION DA,DX(N)
       IF(N.LE.0)RETURN                                                  
       IF(INCX.EQ.1)GOTO 20                                              
 C                                                                       
@@ -1363,23 +1363,23 @@ C
           DO 10 I = 1,NS,INCX
           DX(I) = DA*DX(I)                                              
    10     CONTINUE
-      RETURN                                                            
+      RETURN
 C                                                                       
 C        CODE FOR INCREMENTS EQUAL TO 1.                                
 C                                                                       
 C                                                                       
 C        CLEAN-UP LOOP SO REMAINING VECTOR LENGTH IS A MULTIPLE OF 5.   
-C                                                                       
+C
    20 M = MOD(N,5)
       IF( M .EQ. 0 ) GO TO 40                                           
       DO 30 I = 1,M                                                     
-        DX(I) = DA*DX(I)                                                
+        DX(I) = DA*DX(I)
    30 CONTINUE                                                          
       IF( N .LT. 5 ) RETURN                                             
    40 MP1 = M + 1                                                       
       DO 50 I = MP1,N,5                                                 
-        DX(I) = DA*DX(I)                                                
-        DX(I + 1) = DA*DX(I + 1)                                        
+        DX(I) = DA*DX(I)
+        DX(I + 1) = DA*DX(I + 1)
         DX(I + 2) = DA*DX(I + 2)                                        
         DX(I + 3) = DA*DX(I + 3)                                        
         DX(I + 4) = DA*DX(I + 4)
@@ -1416,7 +1416,7 @@ C         INTERCHANGES IN ARRAY Y.  THE ARRAY X MAY BE SORTED IN
 C         INCREASING ORDER OR DECREASING ORDER.  A SLIGHTLY MODIFIED    
 C         QUICKSORT ALGORITHM IS USED.                                  
 C                                                                       
-C     REFERENCE                                                         
+C     REFERENCE
 C         SINGLETON,R.C., ALGORITHM 347, AN EFFICIENT ALGORITHM FOR
 C         SORTING WITH MINIMAL STORAGE, CACM,12(3),1969,185-7.          
 C                                                                       
@@ -1453,7 +1453,7 @@ C    1, -1, OR -2.,62,2,1)
       RETURN                                                            
 C                                                                       
 C ALTER ARRAY X TO GET DECREASING ORDER IF NEEDED                       
-C                                                                       
+C
    15 IF (KFLAG.GE.1) GO TO 30
       DO 20 I=1,NN                                                      
    20 X(I) = -X(I)                                                      
@@ -1490,7 +1490,7 @@ C                                  T, INTERCHANGE WITH T
       X(J)=T                                                            
       T=X(IJ)                                                           
 C                                  IF FIRST ELEMENT OF ARRAY IS GREATER 
-C                                  THAN T, INTERCHANGE WITH T           
+C                                  THAN T, INTERCHANGE WITH T
       IF (X(I) .LE. T) GO TO 140                                        
       X(IJ)=X(I)                                                        
       X(I)=T                                                            
@@ -1527,7 +1527,7 @@ C                                  THE UNSORTED ARRAY
   155 M=M-1                                                             
       IF (M .EQ. 0) GO TO 300                                           
       I=IL(M)
-      J=IU(M)                                                           
+      J=IU(M)
   160 IF (J-I .GE. 1) GO TO 125                                         
       IF (I .EQ. 1) GO TO 110                                           
       I=I-1                                                             
@@ -1564,7 +1564,7 @@ C                                  IF FIRST ELEMENT OF ARRAY IS GREATER
 C                                  THAN T, INTERCHANGE WITH T           
       IF (X(I) .LE. T) GO TO 230                                        
       X(IJ)=X(I)                                                        
-      X(I)=T                                                            
+      X(I)=T
       T=X(IJ)                                                           
        Y(IJ)= Y(I)
        Y(I)=TY                                                          
@@ -1759,15 +1759,15 @@ C
 C
       TK=NF(IM)
       DO 110 I=1,N0
-       A(I,1)=1.0                                                       
-       DO 115 J=1,BL                                                    
+       A(I,1)=1.0
+       DO 115 J=1,BL
  115     A(I,1+J)=X0(I,J)
-       DO 110 J=1,TK                                                    
- 110     A(I,J+1+BL)=X0(I,JFAC(IM,J)+BL)                                
+       DO 110 J=1,TK
+ 110     A(I,J+1+BL)=X0(I,JFAC(IM,J)+BL)
       TOTO=TK+1+BL
 C
 C     AUGMENT WITH INTERACTION COLUMNS
-C                                                                       
+C
       DO 120 M=2,MIN(CUT,TK)
          CALL INITIA2(MULT,M)
          PART=.FALSE.
@@ -1870,33 +1870,36 @@ C
       DO 410 I=1,NRUNS
  410    ROWS(I)=BEST(I)
 C
-C     FIRST CYCLE THROUGH THE N POSSIBLE ADDITIONAL POINTS              
+C     FIRST CYCLE THROUGH THE N POSSIBLE ADDITIONAL POINTS
 C
       DO 450 I=1,N
         ROWS(NRUNS+1)=I
         CALL EVAL(N1,ROWS,D,NM)
-        IF (D .GT. DBEST) THEN                                          
-          DBEST=D                                                       
+        IF (D .GT. DBEST) THEN
+          DBEST=D
           BEST(NRUNS+1)=I
         ENDIF
  450  CONTINUE
 CC      WRITE(OUT,1201) M,DBEST,(BEST(J), J=1,NRUNS+1)
 C
-C     THEN CYCLE THROUGH THE (NRUNS+1) POSSIBLE DELETED POINTS          
-C                                                                       
+C     THEN CYCLE THROUGH THE (NRUNS+1) POSSIBLE DELETED POINTS
+C
       N1=NRUNS
-      DBEST=DSTART                                                      
-      DO 460 I=1,NRUNS+1                                                
+      DBEST=DSTART
+      DO 460 I=1,NRUNS+1
         DO 465 J=1,NRUNS
           IF (J .LT. I) ROWS(J)=BEST(J)
-          IF (J .GE. I) ROWS(J)=BEST(J+1)                               
- 465    CONTINUE                                                        
+          IF (J .GE. I) ROWS(J)=BEST(J+1)
+ 465    CONTINUE
       CALL EVAL(N1,ROWS,D,NM)
       IF (DTOP(IJ) .LT. D) THEN
         DESIN=.FALSE.
-        DO 466 II=1,NRUNS                                                                                         
- 466      XBEST(II)=DFLOAT(ROWS(II))                                    
-        CALL SSORT(XBEST,ROWS,NRUNS,2)                                  
+        DO 466 II=1,NRUNS
+ 466      XBEST(II)=DFLOAT(ROWS(II))
+        CALL SSORT(XBEST,ROWS,NRUNS,2)
+cccccc
+        if(NDTOP.GT.MXSTRT) NDTOP=MXSTRT-1
+cccccc
         DO 468 JJ=1,NDTOP-1
           IF ((DABS((DTOP(JJ)-D)/DTOP(JJ)) .LT. 0.00001) .AND.
      &    (DESIN .EQV. .FALSE.)) THEN
@@ -1933,7 +1936,7 @@ C
 CC        WRITE(OUT,1202)
 C       CALL SVIGN(NRUNS,BEST,BEST)                                     
 C       WRITE(OUT,1204)                                                   
-C       DO 690 I=1,NRUNS                                                
+C       DO 690 I=1,NRUNS
 C         WRITE(OUT,1205) I,BEST(I),(X(BEST(I),J), J=1,COLS+BL)           
 C690    CONTINUE
       ENDIF                                                             
@@ -2211,7 +2214,7 @@ C ROUTINE IS NOT RECOMMENDED FOR WIDESPREAD USAGE.  ITS REDEEMING
 C FEATURE IS THAT THE EXACT SAME RANDOM NUMBERS (TO WITHIN FINAL ROUND-
 C OFF ERROR) CAN BE GENERATED FROM MACHINE TO MACHINE.  THUS, PROGRAMS
 C THAT MAKE USE OF RANDOM NUMBERS CAN BE EASILY TRANSPORTED TO AND      
-C CHECKED IN A NEW ENVIRONMENT.                                         
+C CHECKED IN A NEW ENVIRONMENT.
 C      THE RANDOM NUMBERS ARE GENERATED BY THE LINEAR CONGRUENTIAL      
 C METHOD DESCRIBED, E.G., BY KNUTH IN SEMINUMERICAL METHODS (P.9),      
 C ADDISON-WESLEY, 1969.  GIVEN THE I-TH NUMBER OF A PSEUDO-RANDOM

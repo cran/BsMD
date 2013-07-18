@@ -51,7 +51,7 @@ LenthPlot(obj, alpha = 0.05, plt = TRUE, limits = TRUE,
     "Quick and Easy Analysis of Unreplicated Factorials".
     \emph{Technometrics} Vol. 31, No. 4. pp. 469--473.
 }
-\author{Ernesto Barrios}
+\author{Ernesto Barrios. Extension provided by Kjetil Kjernsmo (2013).}
 \seealso{\code{\link{DanielPlot}}, \code{\link{BsProb}} and \code{\link{plot.BsProb}}}
 \examples{
 ### Tensile Strength Experiment. Taguchi and Wu. 1980

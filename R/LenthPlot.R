@@ -3,7 +3,7 @@ function (obj, alpha = 0.05, plt = TRUE, limits = TRUE, xlab = "factors",
     ylab = "effects", faclab = NULL, cex.fac = par("cex.lab"), 
     cex.axis = par("cex.axis"), adj = 1, ...) 
 {
-    if (class(obj) == "lm") {
+    if (inherits(obj, "lm")) {
         i <- pmatch("(Intercept)", names(coef(obj)))
         if (!is.na(i)) 
             obj <- 2 * coef(obj)[-pmatch("(Intercept)", names(coef(obj)))]
