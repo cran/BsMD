@@ -1,5 +1,5 @@
-45d2629a930cdc0ddffd144c1530cb53 *DESCRIPTION
-1a71ae5b3a8b5d095105d5f5d4ce2ba4 *NAMESPACE
+7d665b40d26f61330bfe6b89ef86ebc8 *DESCRIPTION
+7837ad0dcad1cfeb93403c0d8379e3d1 *NAMESPACE
 11f4b266cdb0b6946f16a5a6ca72477d *R/BsProb.R
 664032fb74da5416256d543c9db8a4bd *R/DanielPlot.R
 bae70f4019a5f7489e79c20f35cbce4f *R/LenthPlot.R
@@ -35,6 +35,7 @@ f187f32bee0358e82ad9164b79c850c0 *man/MD.Rd
 7b9eab50cfdf4d8ede1b65ec5faee17d *man/print.MD.Rd
 d1633b93b36f912dc546a0f778c838b0 *man/summary.BsProb.Rd
 ac0d79cfe104da85f2dd63082ae41e1e *man/summary.MD.Rd
-d0efa9bb1784bef963139709732314c8 *src/bsmd.f
+dd7a4a0283e924004f066635dd533e94 *src/bsmd.f
+8b3ba523484cf060110057858be9b1da *src/init.c
 18f4c3e6d19c0ef4a9e0b9330622055c *vignettes/BsMD.Rnw
 5d97b88e3f5260b9951b052d4f52d1d5 *vignettes/BsMD.bib

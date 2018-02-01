@@ -611,7 +611,7 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
  700  CONTINUE
 
-      CLOSE(OUNIT)
+C      CLOSE(OUNIT)
 
  1000 FORMAT(' MBCQPI5: BAYESIAN ANALYSIS OF CONFOUNDED DATA',/,
      &1X,'WRITTEN BY R. DANIEL MEYER, THE LUBRIZOL CORPORATION',/
@@ -2007,7 +2007,7 @@ C1202 FORMAT(//,5X,'*** CONVERGENCE ***',//,5X,'DESIGN',/,5X,6('-'),/)
  1211 FORMAT(1X,'  I  J   P(I)   P(J)  TRACE1  TRACE2 QF(I,J)',
      &' QF(J,I)  N*  TERM(I,J)')
 
-      CLOSE(OUT)
+C      CLOSE(OUT)
 
       FLAG = 1
       RETURN
