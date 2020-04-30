@@ -1,4 +1,4 @@
-7d665b40d26f61330bfe6b89ef86ebc8 *DESCRIPTION
+f9e44b43e84e65129d8c0da6492d88ff *DESCRIPTION
 7837ad0dcad1cfeb93403c0d8379e3d1 *NAMESPACE
 11f4b266cdb0b6946f16a5a6ca72477d *R/BsProb.R
 664032fb74da5416256d543c9db8a4bd *R/DanielPlot.R
@@ -9,15 +9,16 @@ bae70f4019a5f7489e79c20f35cbce4f *R/LenthPlot.R
 e495c8b664c86d0f07898d93660fec74 *R/print.MD.R
 dc83f165c661868ec621ae6ebd6e6020 *R/summary.BsProb.R
 1d7b4e7bebe7feecaf136138932d34f1 *R/summary.MD.R
+4602955695df65daa04f2c567d41b8e4 *build/vignette.rds
 1a783147a1e0e8ff63b6f19c76fab5d5 *data/BM86.data.rda
 44a87eaa29db05e43c4f607870845843 *data/BM93.e1.data.rda
 92a0d2041070d86776ffd418dba13d91 *data/BM93.e2.data.rda
 c0a2c4ecd77bce8098dce26e380a889a *data/BM93.e3.data.rda
 b874997d984751a76020cdff65ae33a0 *data/PB12Des.rda
 dceb9cedac3855a0965b4569a28d00d5 *data/Reactor.data.rda
-cd45353ffaff8ada755e1c85e0bf76af *inst/doc/BsMD.R
-18f4c3e6d19c0ef4a9e0b9330622055c *inst/doc/BsMD.Rnw
-0809720854f600dfd5348f5cbd42cf46 *inst/doc/BsMD.pdf
+1176d733a28d4b5b40802684d487f012 *inst/doc/BsMD.R
+97636e77919c79303f0057aed3f758cd *inst/doc/BsMD.Rnw
+41ba531ea6873d549f2635d303bfd512 *inst/doc/BsMD.pdf
 1d0620eeac8da4ee8c6f0b730d3077ba *man/BM86.data.Rd
 10da32be07a3f5f36fd26a67d9cefe4a *man/BM93.e1.data.Rd
 2961b45437190ed924865d19349197ad *man/BM93.e2.data.Rd
@@ -37,5 +38,5 @@ d1633b93b36f912dc546a0f778c838b0 *man/summary.BsProb.Rd
 ac0d79cfe104da85f2dd63082ae41e1e *man/summary.MD.Rd
 dd7a4a0283e924004f066635dd533e94 *src/bsmd.f
 8b3ba523484cf060110057858be9b1da *src/init.c
-18f4c3e6d19c0ef4a9e0b9330622055c *vignettes/BsMD.Rnw
+97636e77919c79303f0057aed3f758cd *vignettes/BsMD.Rnw
 5d97b88e3f5260b9951b052d4f52d1d5 *vignettes/BsMD.bib
