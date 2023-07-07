@@ -31,11 +31,11 @@ Discrimination \hfill}
 %\SweaveOpts{engine=R,eps=TRUE,pdf=TRUE,width=5,height=3,strip.white="true"}
 \setkeys{Gin}{width=\textwidth}
 \title{Using the \textsf{BsMD} Package for Bayesian Screening and Model 
-    Discrimination\footnote{\pkg{BsMD} current version: \Sexpr{packageVersion("BsMD")} }}
+    Discrimination\footnote{\pkg{BsMD} current version: 2023.707}}
 \author{Ernesto Barrios Zamudio \\
     \texttt{ebarrios@itam.mx} \\ [1ex]
     \bf Instituto Tecnol\'{o}gico Aut\'{o}nomo de M\'{e}xico}
-\date{July, 2013}
+\date{July, 2023}
 \maketitle
 \tableofcontents
 
@@ -254,8 +254,13 @@ for explanation and details of the procedure.
 The \texttt{BsProb} function computes the posterior probabilities for
 Bayesian screening. The function calls the \texttt{bs} \textsc{fortran}
 subroutine, a modification of the \texttt{mbcqpi5.f} program included in the
-\textsf{mdopt} bundle. Most of the output of the original program is included in the 
-\texttt{BsProb}'s output list. This is a list of class \texttt{BsProb} with methods functions for \texttt{print}, \texttt{plot} and \texttt{summary}.
+\textsf{mdopt} bundle. The complete output of the program is saved in the
+working directory as \texttt{BsPrint.out}. The file is overwritten if it
+already exists. Thus, rename the \texttt{BsPrint.out} file after each call to
+\texttt{BsProb} if you want to keep the complete output. Note however, that
+most of the output is included in the \texttt{BsProb}'s output list. This is
+a list of class \texttt{BsProb} with methods functions for \texttt{print},
+\texttt{plot} and \texttt{summary}.
 
 \subsection{Fractional Factorial Designs}
 
@@ -494,7 +499,9 @@ one-run-at-a-time experimentation strategy.
 
 The \texttt{MD} function is available for MD optimal follow-up designs. The
 function calls the \texttt{md} \textsc{fortran} subroutine, a modification of
-the \texttt{MD.f} program included in the \textsf{mdopt} bundle. The output of the \texttt{MD} function is a list
+the \texttt{MD.f} program included in the \textsf{mdopt} bundle. The output
+of the \texttt{MD} program is saved at the working directory in
+\texttt{MDPrint.out} file. The output of the \texttt{MD} function is a list
 of class \texttt{MD} with \texttt{print} and \texttt{summary} method
 functions.
 
@@ -564,7 +571,9 @@ are available, they are used as if the follow-up experiment was actually run
 and the posterior factor probabilities for the 12-run experiment determined
 and displayed in figure b). It is apparent how the extra runs clean up the
 activity of factors $B$, $D$ and $E$. Note that the output of the
-\textsf{BsProb} function is used in the the call of \textsf{MD}. Method functions
+\textsf{BsProb} function is used in the the call of \textsf{MD}. The complete
+output of both functions is sent to the files \texttt{BsPrint.out} and
+\texttt{MDPrint.out} respectively. Also, remember that method functions
 \texttt{print} and \texttt{summary} are available to control the amount of
 displayed output.
 

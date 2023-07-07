@@ -1,7 +1,7 @@
 MD <-
 function (X, y, nFac, nBlk = 0, mInt = 3, g = 2, nMod, p, s2, 
     nf, facs, nFDes = 4, Xcand, mIter = 20, nStart = 5, startDes = NULL, 
-    top = 20, eps = 1e-05) 
+    top = 20, eps = 1.0000000000000001e-05) 
 {
     if (nFac + nBlk != ncol(X)) 
         stop("nFac + nBlk != ncol(X)")

@@ -1,6 +1,6 @@
 LenthPlot <-
-function (obj, alpha = 0.05, plt = TRUE, limits = TRUE, xlab = "factors", 
-    ylab = "effects", faclab = NULL, cex.fac = par("cex.lab"), 
+function (obj, alpha = 0.050000000000000003, plt = TRUE, limits = TRUE, 
+    xlab = "factors", ylab = "effects", faclab = NULL, cex.fac = par("cex.lab"), 
     cex.axis = par("cex.axis"), adj = 1, ...) 
 {
     if (inherits(obj, "lm")) {
@@ -38,15 +38,15 @@ function (obj, alpha = 0.05, plt = TRUE, limits = TRUE, xlab = "factors",
             lwd = 3, col = 1, lty = 1)
         abline(h = 0, lty = 4, xpd = FALSE)
         if (limits) {
-            abline(h = ME * c(1, -1), xpd = FALSE, lty = 2, col = grey(0.2))
+            abline(h = ME * c(1, -1), xpd = FALSE, lty = 2, col = grey(0.20000000000000001))
             text(adj * (n + 1) * c(1, 1), (ME + strheight("M", 
-                cex = cex.axis)) * c(1, -1), labels = "ME", cex = 0.9 * 
+                cex = cex.axis)) * c(1, -1), labels = "ME", cex = 0.90000000000000002 * 
                 cex.axis, xpd = FALSE)
             abline(h = SME * c(1, -1), xpd = FALSE, lty = 3, 
-                col = grey(0.2))
+                col = grey(0.20000000000000001))
             text(adj * (n + 1) * c(1, 1), (SME + strheight("M", 
                 cex = cex.axis)) * c(1, -1), labels = "SME", 
-                cex = 0.9 * cex.axis, xpd = FALSE)
+                cex = 0.90000000000000002 * cex.axis, xpd = FALSE)
         }
     }
     return(c(alpha = alpha, PSE = PSE, ME = ME, SME = SME))

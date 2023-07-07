@@ -12,15 +12,15 @@ function (x, code = TRUE, prt = FALSE, cex.axis = par("cex.axis"),
             frame = FALSE, axes = FALSE, ...)
         if (ncol(y) == 1) {
             for (i in x) segments(x[i], 0, x[i], y[i, 1], lwd = lwd, 
-                col = grey(0.2))
+                col = grey(0.20000000000000001))
         }
         else {
             y[, 1] <- apply(prob, 1, min)
             y[, 2] <- apply(prob, 1, max)
             for (i in x) {
-                segments(x[i], 0, x[i], y[i, 2], lwd = lwd, col = grey(0.8), 
+                segments(x[i], 0, x[i], y[i, 2], lwd = lwd, col = grey(0.80000000000000004), 
                   lty = 1)
-                segments(x[i], 0, x[i], y[i, 1], lwd = lwd, col = grey(0.2), 
+                segments(x[i], 0, x[i], y[i, 1], lwd = lwd, col = grey(0.20000000000000001), 
                   lty = 1)
             }
         }

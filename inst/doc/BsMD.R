@@ -71,7 +71,7 @@ main="b) Lenth Plot")
 
 
 ###################################################
-### code chunk number 7: BsMD.Rnw:291-301
+### code chunk number 7: BsMD.Rnw:296-306
 ###################################################
 par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.5,.5,0),oma=c(0,0,0,0),
     pty="s",cex.axis=0.7,cex.lab=0.8,cex.main=0.9)
@@ -86,7 +86,7 @@ DanielPlot(advance.lm,cex.pch=0.6,main="b) Daniel Plot",
 
 
 ###################################################
-### code chunk number 8: BsMD.Rnw:324-337
+### code chunk number 8: BsMD.Rnw:329-342
 ###################################################
 par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.5,.5,0),oma=c(0,0,0,0),
     pty="s",cex.axis=0.7,cex.lab=0.8,cex.main=0.9)
@@ -104,7 +104,7 @@ DanielPlot(yield.lm,cex.pch=0.6,main="b) Daniel Plot",
 
 
 ###################################################
-### code chunk number 9: BsMD.Rnw:367-385
+### code chunk number 9: BsMD.Rnw:372-390
 ###################################################
 par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.5,.5,0),oma=c(0,0,0,0),
     pty="s",cex.axis=0.7,cex.lab=0.8,cex.main=0.9)
@@ -127,7 +127,7 @@ plot(reactor11.BsProb,main="b) All Contrasts")
 
 
 ###################################################
-### code chunk number 10: BsMD.Rnw:409-427
+### code chunk number 10: BsMD.Rnw:414-432
 ###################################################
 par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.5,.5,0),oma=c(0,0,1,0),
     pty="s",cex.axis=0.7,cex.lab=0.8,cex.main=0.9)
@@ -150,7 +150,7 @@ title(substitute("( "*g*" )",list(g=quote(gamma==1.5))),line=-1)
 
 
 ###################################################
-### code chunk number 11: BsMD.Rnw:453-470
+### code chunk number 11: BsMD.Rnw:458-475
 ###################################################
 par(mfrow=c(1,2),mar=c(4,4,1,1),mgp=c(2,.5,0),oma=c(0,0,1,0),
     pty="s",cex.axis=0.7,cex.lab=0.8,cex.main=0.9)
@@ -207,7 +207,7 @@ print(Reactor.data)
 
 
 ###################################################
-### code chunk number 14: BsMD.Rnw:572-595
+### code chunk number 14: BsMD.Rnw:581-604
 ###################################################
 par(mfrow=c(1,2),mar=c(3,4,1,1),mgp=c(2,.5,0),oma=c(0,0,0,0),
     pty="s",cex.axis=0.7,cex.lab=0.8,cex.main=0.9)
@@ -283,7 +283,7 @@ print(reactor12,nMod=5,models=TRUE,plt=FALSE)
 
 
 ###################################################
-### code chunk number 16: BsMD.Rnw:663-676
+### code chunk number 16: BsMD.Rnw:672-685
 ###################################################
 par(mfrow=c(2,2),mar=c(3,4,1,1),mgp=c(2,.5,0),oma=c(1,0,1,0),
     pty="s",cex.axis=0.7,cex.lab=0.8,cex.main=0.9)

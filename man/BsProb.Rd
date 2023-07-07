@@ -33,7 +33,8 @@ main effects and \code{g[2]} for the interaction effects. If \code{ng} greater t
 then \code{ng} values of VIFs between \code{g[1]} and \code{g[2]} are used for
 calculations with the same \eqn{gamma} value for main effects and interactions.
 The function calls the \acronym{FORTRAN} subroutine \file{bm} and captures summary results.
-The output is a list of class \code{BsProb} for which
+The complete output of the \acronym{FORTRAN} code is save in the \file{BsPrint.out}
+file in the working directory. The output is a list of class \code{BsProb} for which
 \code{print}, \code{plot} and \code{summary} methods are available.
 }
 \value{

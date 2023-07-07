@@ -161,7 +161,7 @@ C
      *MULT(MAXCOL),JFAC(MAXCOL),JTOP(MAXNMD,MAXCOL),NFTOP(MAXNMD),
      *PINDEX(MAXNMD),MDCNT
 C
-      CHARACTER*1 CC,ST,BL
+      CHARACTER(1) CC,ST,BL
 C
 C
 C
@@ -180,35 +180,35 @@ CC      WRITE(OUNIT,1000)
       IF ((N .LT. 1) .OR. (N .GT. MAXN)) THEN
 CC        WRITE(OUNIT,1500)
 CC        WRITE(OUNIT,1501) N,MAXN
-	    ind = 1501
+        ind = 1501
         GO TO 700
       ENDIF
 C
       IF ((COLS .LT. 1) .OR. (COLS .GT. MAXCOL)) THEN
 CC        WRITE(OUNIT,1500)
 CC        WRITE(OUNIT,1502) COLS,MAXCOL
-	    ind = 1502
+        ind = 1502
         GO TO 700
       ENDIF
 C
       IF ((BLKS .LT. 0) .OR. (BLKS .GT. MAXCOL)) THEN
 CC        WRITE(OUNIT,1500)
 CC        WRITE(OUNIT,1502) BLKS,MAXCOL
-	    ind = 1502
+          ind = 1502
         GO TO 700
       ENDIF
 C
       IF ((MXFAC .LT. 1) .OR. (MXFAC .GT. COLS)) THEN
-CC        WRITE(OUNIT,1500)
-CC        WRITE(OUNIT,1503) MXFAC,COLS
-	    ind = 1503
+CC       WRITE(OUNIT,1500)
+CC       WRITE(OUNIT,1503) MXFAC,COLS
+        ind = 1503
         GO TO 700
       ENDIF
 C
       IF ((MXINT .LT. 1) .OR. (MXINT .GT. MXMXIN)) THEN
 CC        WRITE(OUNIT,1500)
 CC        WRITE(OUNIT,1504) MXINT,MXMXIN
-	    ind = 1504
+          ind = 1504
         GO TO 700
       ENDIF
 C
@@ -216,21 +216,21 @@ C
      & ((MXFAC*(MXFAC-1)*(MXFAC-2)/6) .GT. MAXTERM)) THEN
 CC        WRITE(OUNIT,1500)
 CC        WRITE(OUNIT,1505) MXINT,COLS
-	    ind = 1505
+         ind = 1505
         GO TO 700
       ENDIF
 C
       IF ((PI .LE. 0) .OR. (PI .GE. 1.0)) THEN
 CC        WRITE(OUNIT,1500)
 CC        WRITE(OUNIT,1506) PI
-	    ind = 1506
+          ind = 1506
         GO TO 700
       ENDIF
 C
       IF ((INDGAM .NE. 0) .AND. (INDGAM .NE. 1)) THEN
-CC        WRITE(OUNIT,1500)
+CC       WRITE(OUNIT,1500)
 CC       WRITE(OUNIT,1507) INDGAM
-	    ind = 1507
+         ind = 1507
         GO TO 700
       ENDIF
 C
@@ -240,7 +240,7 @@ C
        IF (GAMMA(1) .LT. 0.0) THEN
 CC        WRITE(OUNIT,1500)
 CC        WRITE(OUNIT,1508) GAMMA(1)
-	     ind = 15081
+          ind = 15081
          GO TO 700
        ENDIF
 
@@ -265,25 +265,25 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
        IF ((NGAM .LE. 1) .OR. (NGAM .GT. MAXGAM)) THEN
 CC         WRITE(OUNIT,1500)
 CC         WRITE(OUNIT,1509) NGAM,MAXGAM
-	     ind = 1509
+           ind = 1509
          GO TO 700
        ENDIF
        IF (GAMMA(1) .LE. 0.0) THEN
 CC         WRITE(OUNIT,1500)
 CC        WRITE(OUNIT,1508) GAMMA(1)
-	     ind = 15082
+          ind = 15082
          GO TO 700
        ENDIF
        IF (GAMMA(NGAM) .LE. 0.0) THEN
 CC         WRITE(OUNIT,1500)
 CC         WRITE(OUNIT,1508) GAMMA(1)
-	     ind = 15083
+           ind = 15083
          GO TO 700
        ENDIF
        IF (GAMMA(NGAM) .LE. GAMMA(1)) THEN
 CC         WRITE(OUNIT,1500)
 CC         WRITE(OUNIT,1510) GAMMA(1),GAMMA(NGAM)
-	     ind = 1510
+           ind = 1510
          GO TO 700
        ENDIF
       ENDIF
@@ -310,8 +310,9 @@ ccccccccccccccccccccccccccccccccccccccccccccc
         PROB0(i) = 0.0D0
 50    continue
       do 51 i = 1, MAXGAM
-      do 51 j = 1, MAXCOL
+      do 901 j = 1, MAXCOL
         PROB(i,j) = 0.0D0
+901    continue
 51    continue
       do 52 i = 1,MAXNMD
         PTOP(i) = 0.0D0
@@ -333,15 +334,18 @@ C     NFTOP(1)=0
       EXPON=-FLOAT(N-1)/2.0
       ROOTN=SQRT(FLOAT(N))
       DO 15 I=1,NTOP
- 15     PINDEX(I)=I
+           PINDEX(I)=I
+ 15   END DO
 C
 C
 C
       DO 100 M=1,N
- 100     MEAN=MEAN+Y(M)                                                 
+      MEAN=MEAN+Y(M)
+ 100  continue                                               
       MEAN=MEAN/FLOAT(N)
       DO 110 M=1,N                                                      
- 110   S=S+(Y(M)-MEAN)**2                                               
+         S=S+(Y(M)-MEAN)**2                                               
+110   END DO
 C     SIGTOP(1)=S/FLOAT(N-1)
 C
 C
@@ -349,7 +353,8 @@ C
       IF (INDGAM .EQ. 1) THEN
         DEL=(GAMMA(NGAM)-GAMMA(1))/FLOAT(NGAM-1)
         DO 120 I=2,NGAM-1
- 120      GAMMA(I)=GAMMA(1)+FLOAT(I-1)*DEL
+         GAMMA(I)=GAMMA(1)+FLOAT(I-1)*DEL
+120     END DO    
       ENDIF
 C
 C
@@ -364,22 +369,28 @@ C     AUGMENT WITH INTERACTION COLUMNS
 C                                                                       
       MDCNT=MDCNT+1
       DO 210 I=1,N                                                      
-       A(I,1)=1.0                                                       
-      DO 205 J=1,BLKS                                                   
- 205   A(I,J+1)=X(I,J)
-      DO 210 J=1,NFAC
- 210   A(I,BLKS+J+1)=X(I,BLKS+JFAC(J))
+        A(I,1)=1.0                                                       
+        DO 205 J=1,BLKS                                                   
+            A(I,J+1)=X(I,J)
+ 205    END DO
+      DO 211 J=1,NFAC
+        A(I,BLKS+J+1)=X(I,BLKS+JFAC(J))
+ 211  END DO 
+ 210  END DO 
       NTERM=NFAC+1+BLKS                                                 
       DO 250 M=2,MIN(MXINT,NFAC)
          CALL INITIA(MULT,M,MAXCOL)                                     
          PART=.FALSE.                                                   
- 220     IF (.NOT. PART) THEN                                           
+ 220     IF (.NOT. PART) THEN
            NTERM=NTERM+1                                                
            DO 230 I=1,N                                                 
- 230         A(I,NTERM)=A(I,MULT(1)+1+BLKS)*A(I,MULT(2)+1+BLKS)
+             A(I,NTERM)=A(I,MULT(1)+1+BLKS)*A(I,MULT(2)+1+BLKS)
+ 230       END DO
            DO 240 II=3,M
-             DO 240 I=1,N
- 240           A(I,NTERM)=A(I,NTERM)*A(I,MULT(II)+1+BLKS)
+             DO 241 I=1,N
+                  A(I,NTERM)=A(I,NTERM)*A(I,MULT(II)+1+BLKS)
+ 241         CONTINUE
+ 240       CONTINUE
            CALL INCREM(MULT,PART,M,NFAC,MAXCOL)
            GO TO 220                                                    
          ENDIF                                                          
@@ -388,41 +399,50 @@ C
 C      FORM X-PRIME-X MATRIX
 C
       DO 270 I=1,NTERM                                                  
-      DO 270 J=I,NTERM
-        AA(I,J)=0.0
-        DO 260 M=1,N                                                    
- 260      AA(I,J)=AA(I,J)+A(M,I)*A(M,J)
-        ATEM(I,J)=AA(I,J)
-        ATEM(J,I)=AA(I,J)
- 270    AA(J,I)=AA(I,J)
+        DO 271 J=I,NTERM
+          AA(I,J)=0.0
+          DO 260 M=1,N                                                    
+            AA(I,J)=AA(I,J)+A(M,I)*A(M,J)
+ 260      END DO
+          ATEM(I,J)=AA(I,J)
+          ATEM(J,I)=AA(I,J)
+ 271     END DO    
+         AA(J,I)=AA(I,J)
+ 270  END DO
 C
 C   LOOP THROUGH VARIOUS VALUES OF GAMMA
 C
       DO 400 IGAM=1,NGAM
         DO 280 I=1,NTERM
-          DO 280 J=1,NTERM
- 280        AA(I,J)=ATEM(I,J)
+          DO 281 J=1,NTERM
+         AA(I,J)=ATEM(I,J)
+ 281      END DO
+ 280    END DO
       GINVSQ=1.0/(GAMMA(IGAM)**2)
 C     PGAMMA=(GAMMA(IGAM)**(-3))*DEXP(-1.0/(GAMMA(IGAM)**2))
       PGAMMA=1.0
       DO 310 I=2,NTERM
- 310    AA(I,I)=AA(I,I)+GINVSQ
+        AA(I,I)=AA(I,I)+GINVSQ
+ 310  END DO
       IF (INDGAM .EQ. 0) THEN
           DO 311 I=BLKS+NFAC+2,NTERM                                    
- 311        AA(I,I)=AA(I,I)-GINVSQ+G2INSQ
+            AA(I,I)=AA(I,I)-GINVSQ+G2INSQ
+ 311      END DO 
       ENDIF
       LGAM2=DLOG10(GAMMA(IGAM))
       IF (INDGAM .EQ. 0) LGAM2=DLOG10(GAM2)
       PIGAM=((PRATIO/GAMMA(IGAM))**NFAC)/(GAMMA(IGAM)**BLKS)
       DO 320 I=1,NTERM
         B(I)=0.0                                                        
-        DO 320 M=1,N                                                    
- 320      B(I)=B(I)+A(M,I)*Y(M)                                         
+        DO 321 M=1,N                                                    
+          B(I)=B(I)+A(M,I)*Y(M)
+ 321    END DO
+ 320  END DO
       CALL DPOCO(AA,MAXTERM,NTERM,COND,Z,INFO)                          
       IF ((COND+1.0) .EQ. COND) THEN                                    
 CC       WRITE(OUNIT,1511)
        OCOUNT=OCOUNT+1
-       GO TO 400                                                        
+      GO TO 400                                                        
       ENDIF
       CALL DPOSL(AA,MAXTERM,NTERM,B)                                    
       CALL DPODI(AA,MAXTERM,NTERM,DT,10)                                
@@ -434,10 +454,12 @@ CC       WRITE(OUNIT,1511)
       SR2=0.0
       DO 340 M=1,N                                                      
         RES(M)=Y(M)
-       DO 330 I=1,NTERM                                                 
- 330    RES(M)=RES(M)-A(M,I)*B(I)
-      SR2=SR2+RES(M)**2
- 340  SR=SR+RES(M)*Y(M)
+        DO 330 I=1,NTERM                                                 
+          RES(M)=RES(M)-A(M,I)*B(I)
+ 330    END DO
+        SR2=SR2+RES(M)**2
+        SR=SR+RES(M)*Y(M)
+ 340  END DO 
 C     DO 350 I=2,NTERM
 C350    SR=SR+(B(I)**2)/(GAMMA(IGAM)**2)                                
 C
@@ -460,7 +482,8 @@ C     WRITE(6,*) 'PARTIALLY SCALED PROBABILITY= ',W
               SIGTOP(NLOW)=SR/FLOAT(N-1)
               NFTOP(NLOW)=NFAC
               DO 355 I=1,NFAC
- 355            JTOP(NLOW,I)=JFAC(I)
+                JTOP(NLOW,I)=JFAC(I)
+ 355          END DO
             ENDIF
             NORM(IGAM)=NORM(IGAM)+W                                     
             IF (NFAC .EQ. 0) THEN
@@ -469,17 +492,22 @@ C     WRITE(6,*) 'PARTIALLY SCALED PROBABILITY= ',W
             ENDIF
             DO 360 I=1,NFAC
               SPROB(JFAC(I))=SPROB(JFAC(I))+W*PGAMMA
- 360          PROB(JFAC(I),IGAM)=PROB(JFAC(I),IGAM)+W
+              PROB(JFAC(I),IGAM)=PROB(JFAC(I),IGAM)+W
+ 360        END DO
             IF (W .GT. PSCAL*BIG) THEN
               PSCAL=PSCAL*BIG
               DO 370 I=1,COLS
                 SPROB(I)=SPROB(I)/BIG
-                DO 370 J=1,NGAM
- 370             PROB(I,J)=PROB(I,J)/BIG
+                DO 371 J=1,NGAM
+                  PROB(I,J)=PROB(I,J)/BIG
+ 371            END DO
+ 370          END DO
               DO 380 I=1,NTOP
- 380           PTOP(I)=PTOP(I)/BIG
+                 PTOP(I)=PTOP(I)/BIG
+ 380          END DO
               DO 390 I=1,NGAM
- 390           NORM(I)=NORM(I)/BIG
+                NORM(I)=NORM(I)/BIG
+ 390          END DO
             ENDIF
 C
 C     END COMPUTE                                                       
@@ -524,15 +552,19 @@ C       PGAMMA=(GAMMA(I)**(-3))*DEXP(-1.0/(GAMMA(I)**2))
 C       PROB0=PROB0+PGAMMA
         SUMNORM=SUMNORM+PGAM(I)
         DO 520 J=1,COLS
-520      PROB(J,I)=PROB(J,I)/NORM(I)
-530   MXNORM=DMAX1(MXNORM,PGAM(I))
-        DO 540 J=1,COLS
-540      SPROB(J)=SPROB(J)/SUMNORM
+           PROB(J,I)=PROB(J,I)/NORM(I)
+520     END DO
+        MXNORM=DMAX1(MXNORM,PGAM(I))
+530   END DO
+      DO 540 J=1,COLS
+         SPROB(J)=SPROB(J)/SUMNORM
+540   END DO  
 CC      WRITE(OUNIT,1101)
       IF (INDGAM .EQ. 0) THEN
         DO 545 I=1,NTOP
-545      PTOP(I)=PTOP(I)/SUMNORM
-          CALL SSORT(PTOP,PINDEX,NTOP,-2)
+           PTOP(I)=PTOP(I)/SUMNORM
+545     END DO
+        CALL SSORT(PTOP,PINDEX,NTOP,-2)
         IF (NTOP .GT. MDCNT) NTOP=MDCNT
         CALL OSPACE(LS,OCOUNT,NTOP+4,CC)
 CC        WRITE(OUNIT,1105) CC,NTOP
@@ -540,7 +572,7 @@ CC        WRITE(OUNIT,1105) CC,NTOP
 CC       WRITE(OUNIT,1106) PTOP(I),SIGTOP(PINDEX(I)),NFTOP(PINDEX(I)),
 CC     &(JTOP(PINDEX(I),J),J=1,NFTOP(PINDEX(I)))
 CC       WRITE(OUNIT,1101)
-547     CONTINUE
+547     END DO
       ENDIF
       IF (INDGAM .EQ. 1) THEN
         CALL OSPACE(LS,OCOUNT,NGAM+2,CC)
@@ -550,7 +582,7 @@ CC        WRITE(OUNIT,1102) CC
          BAR=IDNINT((P-DMOD(P,.05D0))/.05D0)
 CC         WRITE(OUNIT,1103)
 CC     &    GAMMA(I),PGAM(I),(ST,J=1,BAR),(BL,J=1,20-BAR)
-550      CONTINUE
+550      END DO
 CC        WRITE(OUNIT,1101)
       ENDIF
       CALL OSPACE(LS,OCOUNT,COLS+5,CC)
@@ -563,7 +595,7 @@ CC      WRITE(OUNIT,1114) P,(ST,J=1,BAR),(BL,J=1,20-BAR)
       DO 560 I=1,COLS
          P=DINT(1000.0D0*SPROB(I))/1000.0D0
          BAR=IDNINT((P-DMOD(P,.05D0))/.05D0)
- 560     CONTINUE
+ 560  END DO
 CC         WRITE(OUNIT,1109) I,SPROB(I),(ST,J=1,BAR),(BL,J=1,20-BAR)
 CC      WRITE(OUNIT,1101)
       IF (INDGAM .EQ. 1) THEN
@@ -591,20 +623,27 @@ C Whatever is printed is an output subroutine parameter
         osigtop(i) = SIGTOP(PINDEX(i))
         onftop(i) = NFTOP(PINDEX(i))
         do 451 j= 1,MXFAC
-451        ojtop(i,j)=0
+           ojtop(i,j)=0
+451     end do
         do 452 j= 1,NFTOP(PINDEX(i))
-452        ojtop(i,j) = JTOP(PINDEX(I),J)
-450   continue
+           ojtop(i,j) = JTOP(PINDEX(I),J)
+452     end do
+450   end do
       osprob(1) = p0
       do 456 i = 1,COLS
-456   osprob(i+1) = SPROB(i)
+         osprob(i+1) = SPROB(i)
+456   end do 
       do 457 i = 1,NGAM
-457   opgam(i) = PGAM(i)
+        opgam(i) = PGAM(i)
+457   end do 
       do 458 j = 1, ngam
-458   oprob(1,j) = (PROB0(j)/NORM(j))/PSCAL
+         oprob(1,j) = (PROB0(j)/NORM(j))/PSCAL
+458   end do 
       do 459 i = 1, cols
-         do 459 j = 1, ngam
-459      oprob(i+1,j) = prob(i,j)
+         do 460 j = 1, ngam
+         oprob(i+1,j) = prob(i,j)
+460         end do 
+459      end do 
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
       ind = 1
@@ -692,7 +731,7 @@ C
 C
       SUBROUTINE OSPACE(LS,OCOUNT,K,CC)
       INTEGER OCOUNT,K
-      CHARACTER*1 CC
+      CHARACTER(1) CC
       IF (((LS-OCOUNT) .LT. K) .AND. (K .LT. LS)) THEN
         OCOUNT=K
         CC='1'
@@ -717,8 +756,9 @@ C
  50   IF ((.NOT. OK) .AND. (L .GT. 0)) THEN
          IF (J(L) .LT. N-R+L) THEN                                      
             J(L)=J(L)+1
-            DO 101 M=L+1,R                                              
+            DO 102 M=L+1,R                                              
  101          J(M)=J(M-1)+1
+ 102        END DO
             OK=.TRUE.                                                   
          ELSE                                                           
             L=L-1                                                       
@@ -736,9 +776,11 @@ C       IN LEXICAL ORDER (1,2,3,...,R)
 C
         INTEGER J(MAXCOL),R,I
          DO 401 I=1,R
- 401        J(I)=I
+            J(I)=I
+ 401     END DO
          DO 402 I=R+1,MAXCOL
- 402        J(I)=0
+            J(I)=0
+ 402     END DO
       RETURN
       END
 C
@@ -1248,7 +1290,8 @@ C       AND LY IS DEFINED IN A SIMILAR WAY USING INCY.
 C
       DOUBLE PRECISION DX(N),DY(N),DA
       IF(N.LE.0.OR.DA.EQ.0.D0) RETURN
-      IF(INCX.EQ.INCY) IF(INCX-1) 5,20,60
+      if((INCX.EQ.INCY).AND.(INCX.GE.1)) go to 20
+    
     5 CONTINUE
 C
 C        CODE FOR NONEQUAL OR NONPOSITIVE INCREMENTS.
@@ -1266,10 +1309,12 @@ C
 C
 C        CODE FOR BOTH INCREMENTS EQUAL TO 1
 C
-C
 C        CLEAN-UP LOOP SO REMAINING VECTOR LENGTH IS A MULTIPLE OF 4.
 C
-   20 M = MOD(N,4)
+20    CONTINUE
+      if(INCX.GT.1) go to 60    
+
+      M = MOD(N,4)
       IF( M .EQ. 0 ) GO TO 40
       DO 30 I = 1,M
         DY(I) = DY(I) + DA*DX(I)
@@ -1304,7 +1349,8 @@ C
       DOUBLE PRECISION DX(N),DY(N)
       DDOT = 0.D0                                                       
       IF(N.LE.0)RETURN                                                  
-      IF(INCX.EQ.INCY) IF(INCX-1) 5,20,60                               
+      if((INCX.EQ.INCY).AND.(INCX.GE.1)) go to 20
+
     5 CONTINUE
 C
 C         CODE FOR UNEQUAL OR NONPOSITIVE INCREMENTS.                   
@@ -1325,7 +1371,9 @@ C
 C                                                                       
 C        CLEAN-UP LOOP SO REMAINING VECTOR LENGTH IS A MULTIPLE OF 5.
 C                                                                       
-   20 M = MOD(N,5)                                                      
+20    continue 
+      if(INCX.GT.1) go to 60 
+      M = MOD(N,5)                                                      
       IF( M .EQ. 0 ) GO TO 40                                           
       DO 30 I = 1,M                                                     
          DDOT = DDOT + DX(I)*DY(I)
@@ -1456,8 +1504,10 @@ C ALTER ARRAY X TO GET DECREASING ORDER IF NEEDED
 C
    15 IF (KFLAG.GE.1) GO TO 30
       DO 20 I=1,NN                                                      
-   20 X(I) = -X(I)                                                      
-   30 GO TO (100,200),KK                                                
+         X(I) = -X(I)  
+ 20   END DO
+
+ 30   if(KK.GT.1) GO TO 200
 C                                                                       
 C SORT X ONLY                                                           
 C                                                                       
@@ -1645,7 +1695,8 @@ C CLEAN UP
 C
   300 IF (KFLAG.GE.1) RETURN
       DO 310 I=1,NN
-  310 X(I) = -X(I)
+         X(I) = -X(I)
+ 310  END DO
       RETURN
       END
 
@@ -1680,6 +1731,9 @@ C>>>>>>>>>>>>>>>>>>>>  mds.f  <<<<<<<<<<<<<<<<<<<<<<<<<C
 
       COMMON BETA,G,P,X,SIGMA2,NF,JFAC,BL,CUT,COLS,NM
 
+c     To avoid warnings
+      DATA BESTI /0/
+
       OUT = 1
 CC      OPEN(OUT,FILE="MDPrint.out")
 
@@ -1690,15 +1744,19 @@ CC      OPEN(OUT,FILE="MDPrint.out")
       CUT = cCUT
 
       do 8 i = 1, N
-        do 8 j = 1, (BL+COLS)
-8       X(i,j) = cX(i,j)
-      do 5 i = 1, NM
+         do 9 j = 1, (BL+COLS)
+            X(i,j) = cX(i,j)
+9        END DO
+8     END DO
+
+      DO 5 i = 1, NM
         NF(i) = cNF(i)
         SIGMA2(i) = cSIGMA2(i)
         P(i) = cP(i)
-        do 6 j = 1, MNF
-6         JFAC(i,j) = cJFAC(i,j)
-5     continue
+        DO 6 j = 1, MNF
+          JFAC(i,j) = cJFAC(i,j)
+6       END DO
+5     END DO
 
 CC      WRITE(OUT,800)
       IF (IND .EQ. 1) THEN
@@ -1722,12 +1780,10 @@ C  * SUPPRESS UNDERFLOW WARNINGS ON IBM *
 C  **************************************
 C     CALL ERRSET(208,0,-1,1)
 
-c     To avoid warnings
-      DATA BESTI /0/
-
 C      DATA DTOP /MXSTRT*0.0/
-      do 17 i = 1, MXSTRT
-17    DTOP(i) = 0.0D0
+      DO 17 i = 1, MXSTRT
+         DTOP(i) = 0.0D0
+17    END DO
 
 CC      WRITE(OUT,1102)
 CC      DO 16 I=1,N
@@ -1748,22 +1804,28 @@ C
  925     IF (.NOT. PART) THEN
            TOTO=TOTO+1
            DO 930 I=1,N
- 930         X(I,TOTO)=X(I,MULT(1)+BL)*X(I,MULT(2)+BL)
+              X(I,TOTO)=X(I,MULT(1)+BL)*X(I,MULT(2)+BL)
+ 930       END DO
            DO 935 II=3,M
-             DO 935 I=1,N
- 935           X(I,TOTO)=X(I,TOTO)*X(I,MULT(II)+BL)
+              DO 936 I=1,N
+                 X(I,TOTO)=X(I,TOTO)*X(I,MULT(II)+BL)
+ 936          END DO 
+ 935       END DO 
            CALL INVREM2(MULT,PART,M,COLS)
            GO TO 925
          ENDIF
- 920  CONTINUE
+ 920  END DO
 C
       TK=NF(IM)
       DO 110 I=1,N0
-       A(I,1)=1.0
-       DO 115 J=1,BL
- 115     A(I,1+J)=X0(I,J)
-       DO 110 J=1,TK
- 110     A(I,J+1+BL)=X0(I,JFAC(IM,J)+BL)
+         A(I,1)=1.0
+         DO 115 J=1,BL
+            A(I,1+J)=X0(I,J)
+ 115     END DO
+         DO 111 J=1,TK
+            A(I,J+1+BL)=X0(I,JFAC(IM,J)+BL)
+ 111     END DO
+ 110  END DO
       TOTO=TK+1+BL
 C
 C     AUGMENT WITH INTERACTION COLUMNS
@@ -1774,10 +1836,13 @@ C
  125     IF (.NOT. PART) THEN
            TOTO=TOTO+1
            DO 130 I=1,N0
- 130         A(I,TOTO)=A(I,MULT(1)+1+BL)*A(I,MULT(2)+1+BL)
+              A(I,TOTO)=A(I,MULT(1)+1+BL)*A(I,MULT(2)+1+BL)
+ 130       END DO
            DO 135 II=3,M
-             DO 135 I=1,N0
- 135           A(I,TOTO)=A(I,TOTO)*A(I,MULT(II)+1+BL)
+             DO 136 I=1,N0
+                A(I,TOTO)=A(I,TOTO)*A(I,MULT(II)+1+BL)
+ 136         END DO
+ 135       END DO
            CALL INVREM2(MULT,PART,M,TK)
            GO TO 125
          ENDIF
@@ -1786,29 +1851,39 @@ C
 C      FORM X-PRIME-X MATRIX
 C
       DO 140 I=1,TOTO
-      DO 140 J=I,TOTO
-        AA(I,J)=0.0
-        DO 145 M=1,N0
- 145      AA(I,J)=AA(I,J)+A(M,I)*A(M,J)
- 140   AA(J,I)=AA(I,J)
+         DO 141 J=I,TOTO
+            AA(I,J)=0.0
+            DO 145 M=1,N0
+               AA(I,J)=AA(I,J)+A(M,I)*A(M,J)
+ 145        END DO
+ 141     END DO
+         AA(J,I)=AA(I,J)
+ 140  END DO
+      
       DO 150 I=2,TK+1+BL
- 150   AA(I,I)=AA(I,I)+1.0/(GAMMA**2)
+         AA(I,I)=AA(I,I)+1.0/(GAMMA**2)
+ 150  END DO
+      
       DO 155 I=TK+2+BL,TOTO
- 155   AA(I,I)=AA(I,I)+1.0/(GAM2**2)
+         AA(I,I)=AA(I,I)+1.0/(GAM2**2)
+ 155  END DO
       DO 160 I=1,TOTO
-      B(I)=0.0
-      DO 160 M=1,N0
- 160    B(I)=B(I)+A(M,I)*Y0(M)
+         B(I)=0.0
+         DO 161 M=1,N0
+            B(I)=B(I)+A(M,I)*Y0(M)
+ 161     END DO
+ 160  END DO
 C     CALL DLINDS(TOTO,AA,MAXCOL,AA,MAXCOL)
       CALL DPOCO(AA,MAXCOL,TOTO,RCOND,Z,INFO)
       CALL DPODI(AA,MAXCOL,TOTO,DET,1)
       DO 165 I=1,TOTO
         BETA(IM,I)=0.0
-        DO 165 J=1,TOTO
-          IF (I .GT. J) AA(I,J)=AA(J,I)
-          BETA(IM,I)=BETA(IM,I)+AA(I,J)*B(J)
-          G(IM,I,J)=AA(I,J)
- 165    CONTINUE
+        DO 166 J=1,TOTO
+           IF (I .GT. J) AA(I,J)=AA(J,I)
+           BETA(IM,I)=BETA(IM,I)+AA(I,J)*B(J)
+           G(IM,I,J)=AA(I,J)
+ 166    END DO  
+ 165  END DO
  190  CONTINUE
 C
 C
@@ -1825,8 +1900,9 @@ C     CALL RNUND(NRUNS,N,BEST)
       IF (INITDES .GT. 0) THEN
         CALL RANST(NRUNS,N,BEST,0.0D0)
       ELSE
-        do 791 I=1,NRUNS
-791        BEST(I) = MBEST(ISTART,I)
+         DO 791 I=1,NRUNS
+            BEST(I) = MBEST(ISTART,I)
+791      END DO
       ENDIF
 C      WRITE(OUT,1211)
       CALL EVAL(NRUNS,BEST,D,NM)
@@ -1838,14 +1914,16 @@ C
       IF (DTOP(IJ) .LT. DBEST) THEN
         DESIN=.FALSE.
         DO 207 I=1,NRUNS
- 207      XBEST(I)=DFLOAT(BEST(I))
+          XBEST(I)=DFLOAT(BEST(I))
+ 207    END DO
         CALL SSORT(XBEST,BEST,NRUNS,2)
         DO 209 J=1, NDTOP-1
           IF ((DABS((DTOP(J)-DBEST)/DTOP(J)) .LT. 0.00001) .AND.
      &    (DESIN .EQV. .FALSE.)) THEN
             IZ=0
             DO 208 I=1,NRUNS
- 208          IZ=IZ+IABS(TOPROW(J,I)-BEST(I))
+               IZ=IZ+IABS(TOPROW(J,I)-BEST(I))
+ 208        END DO
             IF (IZ .EQ. 0) DESIN=.TRUE.
           ENDIF
  209    CONTINUE
@@ -1868,7 +1946,8 @@ C
       M=M+1
       N1=NRUNS+1
       DO 410 I=1,NRUNS
- 410    ROWS(I)=BEST(I)
+         ROWS(I)=BEST(I)
+ 410  END DO
 C
 C     FIRST CYCLE THROUGH THE N POSSIBLE ADDITIONAL POINTS
 C
@@ -1895,7 +1974,8 @@ C
       IF (DTOP(IJ) .LT. D) THEN
         DESIN=.FALSE.
         DO 466 II=1,NRUNS
- 466      XBEST(II)=DFLOAT(ROWS(II))
+           XBEST(II)=DFLOAT(ROWS(II))
+ 466    END DO
         CALL SSORT(XBEST,ROWS,NRUNS,2)
 cccccc
         if(NDTOP.GT.MXSTRT) NDTOP=MXSTRT-1
@@ -1905,7 +1985,8 @@ cccccc
      &    (DESIN .EQV. .FALSE.)) THEN
             IZ=0
             DO 467 II=1,NRUNS
- 467          IZ=IZ+IABS(TOPROW(JJ,II)-ROWS(II))
+               IZ=IZ+IABS(TOPROW(JJ,II)-ROWS(II))
+ 467        END DO
             IF (IZ .EQ. 0) DESIN=.TRUE.
           ENDIF
  468    CONTINUE
@@ -1945,7 +2026,8 @@ C     WRITE(OUT,1101)
  700  CONTINUE
       ND=MIN0(MXSTRT,NDTOP-1)                                                 
       DO 701 I=1,ND
- 701    ITOP(I)=I                                                       
+         ITOP(I)=I                  
+ 701  END DO                                     
       CALL SSORT(DTOP,ITOP,ND,-2)                                       
 CC      WRITE(OUT,1209)
 CC      WRITE(OUT,1206) ND
@@ -1958,8 +2040,9 @@ ccccccccccccc
       NTOP = MIN0(NTOP,ND)
       DO 711 J = 1,NTOP
         TOPD(J) = DTOP(J)
-        DO 711 K=1,NRUNS
+        DO 712 K=1,NRUNS
            TOPDES(J,K) = TOPROW(ITOP(J),K)
+712     END DO      
 711   CONTINUE
 ccccccccccccc
 CC     IF (ITMAX .GT. 0) THEN
@@ -2007,7 +2090,7 @@ C1202 FORMAT(//,5X,'*** CONVERGENCE ***',//,5X,'DESIGN',/,5X,6('-'),/)
  1211 FORMAT(1X,'  I  J   P(I)   P(J)  TRACE1  TRACE2 QF(I,J)',
      &' QF(J,I)  N*  TERM(I,J)')
 
-C      CLOSE(OUT)
+C     CLOSE(OUT)
 
       FLAG = 1
       RETURN
@@ -2040,10 +2123,11 @@ C  THE FUNCTION RAND RETURNS A UNIFORM(0,1) DEVIATE;
 C  IF ANOTHER RANDOM NUMBER GENERATOR IS AVAILABLE THAT
 C  IS SET UP FOR THE MACHINE THIS IS RUNNING ON, IT CAN BE SUBSTITUTED
 C
-   	  RR=R
+      RR=R
       DO 1 I=1,N1
-        X=RANDO(RR)
- 1      ROWS(I)=IDINT((N-1)*X)+1
+         X=RANDO(RR)
+         ROWS(I)=IDINT((N-1)*X)+1
+ 1    END DO
       RETURN
       END
 C
@@ -2068,9 +2152,12 @@ C
         DO 215 I=1,N1
           A(I,1)=1.0
           DO 220 J=1,BL
- 220        A(I,1+J)=X(ROWS(I),J)
-          DO 215 J=1,TK
- 215        A(I,J+1+BL)=X(ROWS(I),JFAC(IM,J)+BL)
+             A(I,1+J)=X(ROWS(I),J)
+ 220      END DO
+          DO 221 J=1,TK
+             A(I,J+1+BL)=X(ROWS(I),JFAC(IM,J)+BL)
+ 221      END DO
+ 215    END DO
         TOTO=TK+1+BL
 C
 C     AUGMENT WITH INTERACTION COLUMNS
@@ -2091,7 +2178,8 @@ C
      &  (I1-I0-1)*(COLS-I0)-(I1-I0-1)*(I1-I0)/2+I2-I1+BL
             ENDIF
            DO 235 I=1,N1
- 235         A(I,TOTO)=X(ROWS(I),CNO)
+              A(I,TOTO)=X(ROWS(I),CNO)
+ 235       END DO
            CALL INVREM2(MULT,PART,M,TK)
            GO TO 230
          ENDIF
@@ -2100,65 +2188,80 @@ C
 C
 C
       DO 240 I=1,TOTO
-      DO 240 J=1,N1
-         V(I,J)=0.0
-       DO 240 M=1,TOTO
- 240     V(I,J)=V(I,J)+G(IM,I,M)*A(J,M)
+         DO 241 J=1,N1
+            V(I,J)=0.0
+            DO 242 M=1,TOTO
+               V(I,J)=V(I,J)+G(IM,I,M)*A(J,M)
+ 242        END DO
+ 241     END DO
+ 240  CONTINUE  
 C
       DO 245 I=1,N1
-      V2(I,I)=1.0
-      DO 245 J=1,N1
-         IF (I .NE. J) V2(I,J)=0.0
-         DO 245 M=1,TOTO
- 245     V2(I,J)=V2(I,J)+A(I,M)*V(M,J)
+         V2(I,I)=1.0
+         DO 246 J=1,N1
+            IF (I .NE. J) V2(I,J)=0.0
+            DO 247 M=1,TOTO
+               V2(I,J)=V2(I,J)+A(I,M)*V(M,J)
+ 247        END DO
+ 246     END DO
+ 245  END DO
 C
-      DO 246 I=1,N1
-        DO 246 J=1,N1
- 246      V(I,J)=V2(I,J)
+      DO 248 I=1,N1
+         DO 249 J=1,N1
+            V(I,J)=V2(I,J)
+249      END DO
+248   END DO
+
 C     CALL DLINDS(N1,V2,32,V,32)
       CALL DPOCO(V,32,N1,RCOND,Z,INFO)
       CALL DPODI(V,32,N1,DET,1)
       DO 250 I=1,N1
-        DO 250 J=1,N1
-          IF (I .GT. J) V(I,J)=V(J,I)
-          DV(IM,I,J)=V(I,J)
- 250      DV2(IM,I,J)=V2(I,J)
+        DO 251 J=1,N1
+           IF (I .GT. J) V(I,J)=V(J,I)
+           DV(IM,I,J)=V(I,J)
+           DV2(IM,I,J)=V2(I,J)
+ 251    END DO
+ 250  END DO
 C
       DO 255 I=1,N1
         YHAT(IM,I)=0.0
-        DO 255 J=1,TOTO
+        DO 256 J=1,TOTO
           YHAT(IM,I)=YHAT(IM,I)+A(I,J)*BETA(IM,J)
- 255  continue
+256     END DO
+255   CONTINUE
  210  CONTINUE
 c      return
 C
 C
       DO 300 IM=1,NM-1
 C       WRITE(15,*) 'DES- ',ID,' 1ST MODEL PAIR MEMBER- ',IM
-        DO 300 JM=IM+1,NM
-C
-        TR=0.0
-        TR1=0.0
-        TR2=0.0
-        DO 310 I=1,N1
-        DO 310 J=1,N1
-         TR1=TR1+0.5*(DV(IM,I,J)*DV2(JM,J,I))
-         TR2=TR2+0.5*(DV2(IM,I,J)*DV(JM,J,I))
- 310     TR=TR+0.5*(DV(IM,I,J)*DV2(JM,J,I)+DV2(IM,I,J)*DV(JM,J,I))
-C
+         DO 301 JM=IM+1,NM
+            TR=0.0
+            TR1=0.0
+            TR2=0.0
+            DO 302 I=1,N1
+               DO 303 J=1,N1
+                  TR1=TR1+0.5*(DV(IM,I,J)*DV2(JM,J,I))
+                  TR2=TR2+0.5*(DV2(IM,I,J)*DV(JM,J,I))
+              TR=TR+0.5*(DV(IM,I,J)*DV2(JM,J,I)+DV2(IM,I,J)*DV(JM,J,I))  
+303            END DO
+302         END DO
 C
       DO 320 I=1,N1
         W(I)=0.0
         W1(I)=0.0
-        DO 320 J=1,N1
+        DO 321 J=1,N1
           W(I)=W(I)+DV(JM,I,J)*(YHAT(IM,J)-YHAT(JM,J))/SIGMA2(IM)
- 320      W1(I)=W1(I)+DV(IM,I,J)*(YHAT(IM,J)-YHAT(JM,J))/SIGMA2(JM)
+          W1(I)=W1(I)+DV(IM,I,J)*(YHAT(IM,J)-YHAT(JM,J))/SIGMA2(JM)
+ 321    END DO
+ 320  END DO
       DEV=0.0
       DEV1=0.0
       DEV2=0.0
       DO 330 I=1,N1
         DEV1=DEV1+(YHAT(IM,I)-YHAT(JM,I))*W1(I)
- 330    DEV2=DEV2+(YHAT(IM,I)-YHAT(JM,I))*W(I)
+        DEV2=DEV2+(YHAT(IM,I)-YHAT(JM,I))*W(I)
+ 330  END DO
       DEV1=DEV1/2.0
       DEV2=DEV2/2.0
       DEV=(DEV1+DEV2)
@@ -2166,7 +2269,10 @@ C
       D0=P(IM)*P(JM)*(TR+DEV-N1)
       D=D+D0
 C      WRITE(OUT,500) IM,JM,P(IM),P(JM),TR1,TR2,DEV1,DEV2,N1,D0
- 300  CONTINUE
+
+301      END DO
+300   CONTINUE
+ 
  500  FORMAT(1X,I3,I3,F7.4,F7.4,F8.2,F8.2,F8.2,F8.2,I3,F8.2)
       RETURN
       END
@@ -2184,7 +2290,8 @@ C
          IF (J(L) .LT. N-R+L) THEN
             J(L)=J(L)+1
             DO 101 M=L+1,R
- 101          J(M)=J(M-1)+1
+               J(M)=J(M-1)+1
+ 101        END DO
             OK=.TRUE.
          ELSE
             L=L-1
@@ -2198,9 +2305,11 @@ C
       SUBROUTINE INITIA2(J,R)
         INTEGER J(20),R,I                                               
          DO 401 I=1,R                                                   
- 401        J(I)=I                                                      
+            J(I)=I
+ 401     END DO                                                      
          DO 402 I=R+1,20                                                
- 402        J(I)=0                                                      
+            J(I)=0
+ 402     END DO                                                      
       RETURN                                                            
       END                                                               
 C                                                                       
