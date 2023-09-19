@@ -12,8 +12,8 @@ Bayes screening and model discrimination follow-up designs
 \tabular{ll}{
 Package: \tab BsMD\cr
 Type: \tab Package\cr
-Version: \tab 2023.915\cr
-Date: \tab 2023-09-15\cr
+Version: \tab 2023.920\cr
+Date: \tab 2023-09-14\cr
 License: \tab GPL version 2 or later\cr
 }
 The packages allows you to perform the calculations and analyses described

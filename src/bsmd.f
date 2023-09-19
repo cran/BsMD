@@ -168,6 +168,7 @@ C
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c initialization to avoid warning
       G2INSQ=0.D0
+      DEL=1.0D0
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
       INUNIT=5
@@ -652,66 +653,66 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 C      CLOSE(OUNIT)
 
- 1000 FORMAT(' MBCQPI5: BAYESIAN ANALYSIS OF CONFOUNDED DATA',/,
-     &1X,'WRITTEN BY R. DANIEL MEYER, THE LUBRIZOL CORPORATION',/
-     &1X,'ALL RIGHTS RESERVED;    JUNE 1996')
- 1001 FORMAT(A1,'X-MATRIX',/,' --------')
- 1002 FORMAT(' ',I3,15(1X,F7.3))
- 1003 FORMAT(A1,'Y-VECTOR',/,' --------')
- 1004 FORMAT(' ',I3,1X,F10.4)
- 1005 FORMAT(1X,'WEIGHT= ',E16.6E2,' FACTORS: ',30(1X,I2))
- 1100 FORMAT(A1,'NO. OF',3X,'NO. OF',2X,'NO. OF',12X,'MAX ORDER',5X,
-     &'MAX NO. OF',5X,'TOTAL NO. OF',/,' RUNS',5X,'FACTORS',2X,'BLOCKS',
-     &4X,'PI',4X,'INTERACTION',3X,'ACTIVE FACTORS',5X,'MODELS')
- 1101 FORMAT(' ',100('-'))
- 1102 FORMAT(A1,5X,'GAMMA',12X,'PGAM')
- 1103 FORMAT(1X,F10.3,E16.6E2,2X,'+',20(A1),'+')
- 1104 FORMAT(1X,I3,I10,I8,F10.3,I9,I15,I18)
- 1105 FORMAT(A1,' BEST ',I3,' MODELS',//,1X,'PROBABILITY   SIGMA-SQ ',
-     &' NO OF FACTORS   FACTORS')
- 1106 FORMAT(1X,F10.6,F12.4,I6,10X,30(1X,I2))
- 1107 FORMAT(A1,5X,'POSTERIOR PROBABILITIES',
-     &/,' FACTOR',5X,'POST. PROB.')
- 1108 FORMAT(' NONE',F14.3)
- 1109 FORMAT(' ',I4,F14.3,2X,'+',20(A1),'+')
- 1110 FORMAT(A1,11X,'POSTERIOR PROBABILITIES FOR EACH GAMMA VALUE',/)
- 1111 FORMAT(1X,'FACTOR',12(F10.2))
- 1112 FORMAT(' NONE',2X,12(F10.3))
- 1113 FORMAT(' ',I4,2X,12(F10.3))
- 1114 FORMAT(' NONE',F14.3,2X,'+',20(A1),'+')
- 1115 FORMAT(' ',3X,15(1X,F7.3))
- 1116 FORMAT(A1,'POSTERIOR PROBABILITIES WEIGHT-AVERAGED OVER GAMMA',
-     &/,' FACTOR',5X,'POST. PROB.')
- 1117 FORMAT(/,1X,'GAMMA= ',F8.3,'   GAMMA2= ',F8.3,'  NORM= ',E16.6E2)
- 1118 FORMAT(/,1X,'GAMMA= ',F8.3,' TO ',F8.3,' BY ',F6.4,' INCREMENTS')
- 1500 FORMAT(' ***** ERROR *****')
- 1501 FORMAT(1X,'N=',I8,' OUT OF RANGE',/,
-     &' N MUST BE BETWEEN 1 AND ',I4,/)
- 1502 FORMAT(1X,'NO. OF FACTORS = ',I8,' OUT OF RANGE',/,
-     &' MUST BE BETWEEN 1 AND ',I4,/)
- 1503 FORMAT(1X,'MAX. NO. OF FACTORS = ',I8,' OUT OF RANGE',/,
-     &' MUST BE BETWEEN 1 AND TOTAL NO. OF FACTORS= ',I4,/)
- 1504 FORMAT(1X,'MAX. ORDER INTERACTION = ',I8,' OUT OF RANGE',/,
-     &' MUST BE BETWEEN 1 AND ',I4,/)
- 1505 FORMAT(1X,'MAX. ORDER INTERACTION = ',I8,' RESULTS IN TOO',/,
-     &' MANY COLUMNS FOR NO. OF FACTORS = ',I4,/)
- 1506 FORMAT(1X,'PI = ',F8.4,' OUT OF RANGE',/,
-     &' MUST BE BETWEEN 0 AND 1',/)
- 1507 FORMAT(1X,'GAMMA INDICATOR = ',I6,' OUT OF RANGE',/,
-     &' MUST BE EITHER 0 OR 1',/)
- 1508 FORMAT(1X,'GAMMA  = ',I6,' OUT OF RANGE',/,
-     &' MUST BE POSITIVE',/)
- 1509 FORMAT(1X,'NO. OF GAMMAS FOR SEARCH  = ',I6,' OUT OF RANGE',/,
-     &' MUST BE BETWEEN 2 AND ',I5,/)
- 1510 FORMAT(1X,'GAMMA(FIRST) = ',F12.4,' GAMMA(LAST)= ',F12.4,/,
-     &' GAMMA(FIRST) MUST BE LESS THAN GAMMA(LAST)',/)
- 1511 FORMAT(' **** WARNING: SINGULAR MATRIX ENCOUNTERED ****')
- 1512 FORMAT(' **** WARNING: MAX NUMBER OF FACTORS TOO LARGE ****',
-     &/,' CORRECTIVE ACTION: VALUE REDUCED FROM',I3,' TO',I3,/)
- 1513 FORMAT(' **** WARNING: NUMBER OF INDIVIDUAL MODELS TOO BIG ****',
-     &/,' CORRECTIVE ACTION: VALUE REDUCED FROM',I4,' TO',I4,/)
- 1305 FORMAT(1X,'DET:',E16.6E3,' SR:',E16.6E3,' S:',E16.6E3,
-     &' EXPON:',E16.6E3)
+ccc 1000 FORMAT(' MBCQPI5: BAYESIAN ANALYSIS OF CONFOUNDED DATA',/,
+ccc     &1X,'WRITTEN BY R. DANIEL MEYER, THE LUBRIZOL CORPORATION',/
+ccc     &1X,'ALL RIGHTS RESERVED;    JUNE 1996')
+ccc 1001 FORMAT(A1,'X-MATRIX',/,' --------')
+ccc 1002 FORMAT(' ',I3,15(1X,F7.3))
+ccc 1003 FORMAT(A1,'Y-VECTOR',/,' --------')
+ccc 1004 FORMAT(' ',I3,1X,F10.4)
+ccc 1005 FORMAT(1X,'WEIGHT= ',E16.6E2,' FACTORS: ',30(1X,I2))
+ccc 1100 FORMAT(A1,'NO. OF',3X,'NO. OF',2X,'NO. OF',12X,'MAX ORDER',5X,
+ccc     &'MAX NO. OF',5X,'TOTAL NO. OF',/,' RUNS',5X,'FACTORS',2X,'BLOCKS',
+ccc     &4X,'PI',4X,'INTERACTION',3X,'ACTIVE FACTORS',5X,'MODELS')
+ccc 1101 FORMAT(' ',100('-'))
+ccc 1102 FORMAT(A1,5X,'GAMMA',12X,'PGAM')
+ccc 1103 FORMAT(1X,F10.3,E16.6E2,2X,'+',20(A1),'+')
+ccc 1104 FORMAT(1X,I3,I10,I8,F10.3,I9,I15,I18)
+ccc 1105 FORMAT(A1,' BEST ',I3,' MODELS',//,1X,'PROBABILITY   SIGMA-SQ ',
+ccc     &' NO OF FACTORS   FACTORS')
+ccc 1106 FORMAT(1X,F10.6,F12.4,I6,10X,30(1X,I2))
+ccc 1107 FORMAT(A1,5X,'POSTERIOR PROBABILITIES',
+ccc     &/,' FACTOR',5X,'POST. PROB.')
+ccc 1108 FORMAT(' NONE',F14.3)
+ccc 1109 FORMAT(' ',I4,F14.3,2X,'+',20(A1),'+')
+ccc 1110 FORMAT(A1,11X,'POSTERIOR PROBABILITIES FOR EACH GAMMA VALUE',/)
+ccc 1111 FORMAT(1X,'FACTOR',12(F10.2))
+ccc 1112 FORMAT(' NONE',2X,12(F10.3))
+ccc 1113 FORMAT(' ',I4,2X,12(F10.3))
+ccc 1114 FORMAT(' NONE',F14.3,2X,'+',20(A1),'+')
+ccc 1115 FORMAT(' ',3X,15(1X,F7.3))
+ccc 1116 FORMAT(A1,'POSTERIOR PROBABILITIES WEIGHT-AVERAGED OVER GAMMA',
+ccc     &/,' FACTOR',5X,'POST. PROB.')
+ccc 1117 FORMAT(/,1X,'GAMMA= ',F8.3,'   GAMMA2= ',F8.3,'  NORM= ',E16.6E2)
+ccc 1118 FORMAT(/,1X,'GAMMA= ',F8.3,' TO ',F8.3,' BY ',F6.4,' INCREMENTS')
+cccccc 1500 FORMAT(' ***** ERROR *****')
+ccc 1501 FORMAT(1X,'N=',I8,' OUT OF RANGE',/,
+ccc     &' N MUST BE BETWEEN 1 AND ',I4,/)
+ccc 1502 FORMAT(1X,'NO. OF FACTORS = ',I8,' OUT OF RANGE',/,
+ccc     &' MUST BE BETWEEN 1 AND ',I4,/)
+ccc 1503 FORMAT(1X,'MAX. NO. OF FACTORS = ',I8,' OUT OF RANGE',/,
+ccc     &' MUST BE BETWEEN 1 AND TOTAL NO. OF FACTORS= ',I4,/)
+ccc 1504 FORMAT(1X,'MAX. ORDER INTERACTION = ',I8,' OUT OF RANGE',/,
+ccc     &' MUST BE BETWEEN 1 AND ',I4,/)
+ccc 1505 FORMAT(1X,'MAX. ORDER INTERACTION = ',I8,' RESULTS IN TOO',/,
+ccc     &' MANY COLUMNS FOR NO. OF FACTORS = ',I4,/)
+ccc 1506 FORMAT(1X,'PI = ',F8.4,' OUT OF RANGE',/,
+ccc     &' MUST BE BETWEEN 0 AND 1',/)
+ccc 1507 FORMAT(1X,'GAMMA INDICATOR = ',I6,' OUT OF RANGE',/,
+ccc     &' MUST BE EITHER 0 OR 1',/)
+ccc 1508 FORMAT(1X,'GAMMA  = ',I6,' OUT OF RANGE',/,
+ccc     &' MUST BE POSITIVE',/)
+ccc 1509 FORMAT(1X,'NO. OF GAMMAS FOR SEARCH  = ',I6,' OUT OF RANGE',/,
+ccc     &' MUST BE BETWEEN 2 AND ',I5,/)
+ccc 1510 FORMAT(1X,'GAMMA(FIRST) = ',F12.4,' GAMMA(LAST)= ',F12.4,/,
+ccc     &' GAMMA(FIRST) MUST BE LESS THAN GAMMA(LAST)',/)
+ccc 1511 FORMAT(' **** WARNING: SINGULAR MATRIX ENCOUNTERED ****')
+ccc 1512 FORMAT(' **** WARNING: MAX NUMBER OF FACTORS TOO LARGE ****',
+ccc     &/,' CORRECTIVE ACTION: VALUE REDUCED FROM',I3,' TO',I3,/)
+ccc 1513 FORMAT(' **** WARNING: NUMBER OF INDIVIDUAL MODELS TOO BIG ****',
+ccc     &/,' CORRECTIVE ACTION: VALUE REDUCED FROM',I4,' TO',I4,/)
+ccc 1305 FORMAT(1X,'DET:',E16.6E3,' SR:',E16.6E3,' S:',E16.6E3,
+ccc     &' EXPON:',E16.6E3)
       RETURN
       END
 
@@ -757,7 +758,7 @@ C
          IF (J(L) .LT. N-R+L) THEN                                      
             J(L)=J(L)+1
             DO 102 M=L+1,R                                              
- 101          J(M)=J(M-1)+1
+               J(M)=J(M-1)+1
  102        END DO
             OK=.TRUE.                                                   
          ELSE                                                           
@@ -1292,7 +1293,7 @@ C
       IF(N.LE.0.OR.DA.EQ.0.D0) RETURN
       if((INCX.EQ.INCY).AND.(INCX.GE.1)) go to 20
     
-    5 CONTINUE
+ccc    5 CONTINUE
 C
 C        CODE FOR NONEQUAL OR NONPOSITIVE INCREMENTS.
 C
@@ -1351,7 +1352,7 @@ C
       IF(N.LE.0)RETURN                                                  
       if((INCX.EQ.INCY).AND.(INCX.GE.1)) go to 20
 
-    5 CONTINUE
+ccc    5 CONTINUE
 C
 C         CODE FOR UNEQUAL OR NONPOSITIVE INCREMENTS.                   
 C                                                                       
@@ -1486,8 +1487,8 @@ C***ROUTINES CALLED  XERROR
 C***END PROLOGUE                                                        
 C
 C     DIMENSION X(N),Y(N),IL(21),IU(21)                                 
-      DOUBLE PRECISION X(N)                                             
-      INTEGER N,KFLAG,Y(N),IL(21),IU(21)                                
+      DOUBLE PRECISION X(N), T, TT                                             
+      INTEGER N,KFLAG,Y(N), TY, TTY, IL(21),IU(21)                                
 C***FIRST EXECUTABLE STATEMENT    SSORT                                 
       NN = N                                                            
       IF (NN.GE.1) GO TO 10                                             
@@ -1511,14 +1512,14 @@ C
 C                                                                       
 C SORT X ONLY                                                           
 C                                                                       
-  100 CONTINUE                                                          
+ccc  100 CONTINUE                                                          
       M=1                                                               
       I=1                                                               
       J=NN
       R=.375                                                            
   110 IF (I .EQ. J) GO TO 155                                           
-  115 IF (R .GT. .5898437) GO TO 120                                    
-      R=R+3.90625E-2                                                    
+      IF (R .GT. .5898437) GO TO 120                                    
+      R=R + 3.90625E-2                                                    
       GO TO 125                                                         
   120 R=R-.21875                                                        
   125 K=I                                                               
@@ -1600,8 +1601,8 @@ C
       J=NN                                                              
       R=.375
   210 IF (I .EQ. J) GO TO 255                                           
-  215 IF (R .GT. .5898437) GO TO 220
-      R=R+3.90625E-2                                                    
+      IF (R .GT. .5898437) GO TO 220
+      R=R + 3.90625E-2                                                    
       GO TO 225                                                         
   220 R=R-.21875                                                        
   225 K=I                                                               
@@ -1720,7 +1721,7 @@ C>>>>>>>>>>>>>>>>>>>>  mds.f  <<<<<<<<<<<<<<<<<<<<<<<<<C
       DOUBLE PRECISION BETA(MAXM,MAXCOL),G(MAXM,MAXCOL,MAXCOL)
       DOUBLE PRECISION P(MAXM),X(MAXN,MAXCOL),SIGMA2(MAXM)
       DOUBLE PRECISION DTOP(MXSTRT),XBEST(MAXN1)
-      DOUBLE PRECISION D,RCOND,DET(2),DBEST,DSTART
+      DOUBLE PRECISION D,RCOND,DET(2),DBEST,DSTART, DELTAD
       DOUBLE PRECISION A(MAXN0,MAXCOL),AA(MAXCOL,MAXCOL),Z(MAXCOL)
       DOUBLE PRECISION B(MAXCOL)
       INTEGER IM,NM,I,J,BL,NF(MAXM),II,TK,TOTO,M,CUT
@@ -1898,7 +1899,7 @@ CC        WRITE(OUT,1200)
 CC      ENDIF
 C     CALL RNUND(NRUNS,N,BEST)
       IF (INITDES .GT. 0) THEN
-        CALL RANST(NRUNS,N,BEST,0.0D0)
+        CALL RANST(NRUNS,N,BEST,0.0)
       ELSE
          DO 791 I=1,NRUNS
             BEST(I) = MBEST(ISTART,I)
@@ -1914,7 +1915,7 @@ C
       IF (DTOP(IJ) .LT. DBEST) THEN
         DESIN=.FALSE.
         DO 207 I=1,NRUNS
-          XBEST(I)=DFLOAT(BEST(I))
+          XBEST(I)=DBLE(BEST(I))
  207    END DO
         CALL SSORT(XBEST,BEST,NRUNS,2)
         DO 209 J=1, NDTOP-1
@@ -1974,7 +1975,7 @@ C
       IF (DTOP(IJ) .LT. D) THEN
         DESIN=.FALSE.
         DO 466 II=1,NRUNS
-           XBEST(II)=DFLOAT(ROWS(II))
+           XBEST(II)=DBLE(ROWS(II))
  466    END DO
         CALL SSORT(XBEST,ROWS,NRUNS,2)
 cccccc
@@ -2054,41 +2055,41 @@ CC     &           (X(TOPROW(ITOP(J),I),K), K=1,COLS+BL)
 CC 720    CONTINUE
 CC      ENDIF
 CC      WRITE(OUT,1006)
- 800  FORMAT(7X,' FORTRAN PROGRAM MD: BAYESIAN DESIGN OF EXPERIMENTS',/,                
-     &3X,'FOLLOWUP DESIGN / WYNN EXCHANGE / RANDOM START',/,            
-     &7X,'WRITTEN BY DAN MEYER',/,7X,'ALL RIGHTS RESERVED',/)
- 1000 FORMAT(2X,'          NO OF    NO OF  MAX ORDER',
-     &     /,2X,'  N0     FACTORS   BLOCKS INTERACTION  ',
-     &'  GAMMA(MAIN)  GAMMA(INT)  NMODELS')                             
- 1001 FORMAT(1X,I6,I8,I9,I10,F15.3,F12.3,I12,//)                        
- 1002 FORMAT(1X,'NO OF       NO OF   MAX          NO OF RANDOM',/,
-     &       1X,'CANDIDATES  RUNS    ITERATIONS   STARTS')
- 1003 FORMAT(1X,I5,I9,I9,I12,//)                                        
- 1004 FORMAT(2X,'MODEL',8X,'PROB',7X,'SIGSQ',3X,'SIZE',3X,'FACTORS')    
- 1005 FORMAT(1X,I6,F12.5,F12.4,I7,3X,12(I4))
- 1101 FORMAT(1X,100('-'))
- 1102 FORMAT(1X,'CANDIDATE RUNS',/,1X,'--------------')
- 1103 FORMAT(1X,I3,2X,12(F5.2,1X))
- 1104 FORMAT(1X,I3,2X,I5,F8.5,5X,10(I3,1X))
- 1105 FORMAT('1MODEL  SIZE   PROB    FACTORS')
- 1006 FORMAT(/,' PROGRAM DONE')
- 1199 FORMAT(/,1X,'RANDOM START NUMBER:',I3,/)
- 1200 FORMAT(//,5X,'ITERATION    D',6X,'DESIGN(ROWS)',/,
-     &5X,9('-'),2X,5('-'),4X,98('-'))
- 1203 FORMAT(//,5X,'*** MAX ITERATIONS REACHED ***')
- 1204 FORMAT(1X,'RUN  CAND  FACTOR LEVELS',/,1X,35('-'))
- 1205 FORMAT(1X,I3,2X,I3,2X,12(F5.2,1X))
- 1201 FORMAT(5X,I6,F13.4,2X,24(I4),/,25X,24(I4))
-C1202 FORMAT(//,5X,'*** CONVERGENCE ***',//,5X,'DESIGN',/,5X,6('-'),/)
- 1202 FORMAT(//,5X,'*** CONVERGENCE ***',//)
- 1206 FORMAT(1X,'*  THE ',I3,' BEST DESIGNS  *')
- 1207 FORMAT(1X,//,1X,'DESIGN ',I3,' D= ',F13.4,/,
-     &       1X,'RUN  CAND  FACTOR LEVELS',/,1X,35('-'))
- 1209 FORMAT(1X,26('*'))
- 1210 FORMAT(//,8X,'RANK         D',6X,'DESIGN(ROWS)',/,
-     &8X,4('-'),7X,5('-'),4X,98('-'))
- 1211 FORMAT(1X,'  I  J   P(I)   P(J)  TRACE1  TRACE2 QF(I,J)',
-     &' QF(J,I)  N*  TERM(I,J)')
+!  800  FORMAT(7X,' FORTRAN PROGRAM MD: BAYESIAN DESIGN OF EXPERIMENTS',/,                
+!      &3X,'FOLLOWUP DESIGN / WYNN EXCHANGE / RANDOM START',/,            
+!      &7X,'WRITTEN BY DAN MEYER',/,7X,'ALL RIGHTS RESERVED',/)
+!  1000 FORMAT(2X,'          NO OF    NO OF  MAX ORDER',
+!      &     /,2X,'  N0     FACTORS   BLOCKS INTERACTION  ',
+!      &'  GAMMA(MAIN)  GAMMA(INT)  NMODELS')                             
+!  1001 FORMAT(1X,I6,I8,I9,I10,F15.3,F12.3,I12,//)                        
+!  1002 FORMAT(1X,'NO OF       NO OF   MAX          NO OF RANDOM',/,
+!      &       1X,'CANDIDATES  RUNS    ITERATIONS   STARTS')
+!  1003 FORMAT(1X,I5,I9,I9,I12,//)                                        
+!  1004 FORMAT(2X,'MODEL',8X,'PROB',7X,'SIGSQ',3X,'SIZE',3X,'FACTORS')    
+!  1005 FORMAT(1X,I6,F12.5,F12.4,I7,3X,12(I4))
+!  1101 FORMAT(1X,100('-'))
+!  1102 FORMAT(1X,'CANDIDATE RUNS',/,1X,'--------------')
+!  1103 FORMAT(1X,I3,2X,12(F5.2,1X))
+!  1104 FORMAT(1X,I3,2X,I5,F8.5,5X,10(I3,1X))
+!  1105 FORMAT('1MODEL  SIZE   PROB    FACTORS')
+!  1006 FORMAT(/,' PROGRAM DONE')
+!  1199 FORMAT(/,1X,'RANDOM START NUMBER:',I3,/)
+!  1200 FORMAT(//,5X,'ITERATION    D',6X,'DESIGN(ROWS)',/,
+!      &5X,9('-'),2X,5('-'),4X,98('-'))
+!  1203 FORMAT(//,5X,'*** MAX ITERATIONS REACHED ***')
+!  1204 FORMAT(1X,'RUN  CAND  FACTOR LEVELS',/,1X,35('-'))
+!  1205 FORMAT(1X,I3,2X,I3,2X,12(F5.2,1X))
+!  1201 FORMAT(5X,I6,F13.4,2X,24(I4),/,25X,24(I4))
+! C1202 FORMAT(//,5X,'*** CONVERGENCE ***',//,5X,'DESIGN',/,5X,6('-'),/)
+!  1202 FORMAT(//,5X,'*** CONVERGENCE ***',//)
+!  1206 FORMAT(1X,'*  THE ',I3,' BEST DESIGNS  *')
+!  1207 FORMAT(1X,//,1X,'DESIGN ',I3,' D= ',F13.4,/,
+!      &       1X,'RUN  CAND  FACTOR LEVELS',/,1X,35('-'))
+!  1209 FORMAT(1X,26('*'))
+!  1210 FORMAT(//,8X,'RANK         D',6X,'DESIGN(ROWS)',/,
+!      &8X,4('-'),7X,5('-'),4X,98('-'))
+!  1211 FORMAT(1X,'  I  J   P(I)   P(J)  TRACE1  TRACE2 QF(I,J)',
+!      &' QF(J,I)  N*  TERM(I,J)')
 
 C     CLOSE(OUT)
 
@@ -2117,15 +2118,16 @@ C
 C
       SUBROUTINE RANST(N1,N,ROWS,R)
       INTEGER I,N1,N,ROWS(N)
-      DOUBLE PRECISION X,R
+      DOUBLE PRECISION X, RR
 C
 C  THE FUNCTION RAND RETURNS A UNIFORM(0,1) DEVIATE;
 C  IF ANOTHER RANDOM NUMBER GENERATOR IS AVAILABLE THAT
 C  IS SET UP FOR THE MACHINE THIS IS RUNNING ON, IT CAN BE SUBSTITUTED
 C
-      RR=R
+      RR=DBLE(R)
       DO 1 I=1,N1
-         X=RANDO(RR)
+ccc         X=RANDO(R)
+         X=RANDO(R)
          ROWS(I)=IDINT((N-1)*X)+1
  1    END DO
       RETURN
@@ -2140,7 +2142,8 @@ C
       DOUBLE PRECISION P(100),X(256,100),SIGMA2(100)
       DOUBLE PRECISION A(32,100)
       DOUBLE PRECISION V(32,32),V2(32,32),Z(32)
-      DOUBLE PRECISION DV(100,32,32),DV2(100,32,32)
+ccc      DOUBLE PRECISION DV(100,32,32),DV2(100,32,32)
+      DOUBLE PRECISION DV(NM,32,32),DV2(NM,32,32)
       INTEGER IM,NM,I,J,BL,NF(100),TK,TOTO,M,CUT,I0,I1,I2,CNO
       INTEGER JFAC(100,20),MULT(20),ROWS(32),N1,COLS,INFO
       LOGICAL PART
@@ -2273,7 +2276,7 @@ C      WRITE(OUT,500) IM,JM,P(IM),P(JM),TR1,TR2,DEV1,DEV2,N1,D0
 301      END DO
 300   CONTINUE
  
- 500  FORMAT(1X,I3,I3,F7.4,F7.4,F8.2,F8.2,F8.2,F8.2,I3,F8.2)
+ccc 500  FORMAT(1X,I3,I3,F7.4,F7.4,F8.2,F8.2,F8.2,F8.2,I3,F8.2)
       RETURN
       END
 C
@@ -2408,7 +2411,8 @@ C
       RANDO = RANDO / 4194304.
       RETURN
 C
- 20   IX1 = AMOD(R,1.)*4194304. + 0.5
+ccc 20   IX1 = AMOD(R,1.)*4194304. + 0.5
+20    IX1 = INT( AMOD(R,1.)*4194304. + 0.5 )
       IX0 = MOD (IX1, 2048)
       IX1 = (IX1-IX0)/2048
       GO TO 10
